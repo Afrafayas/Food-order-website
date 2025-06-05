@@ -1,7 +1,100 @@
 [
-
-    
-
-
-
+  {
+    "id": 1,
+    "name": "Margherita Pizza",
+    "price": 10.99,
+    "category": "Pizza",
+    "image": "/images/margherita.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Cheeseburger",
+    "price": 8.99,
+    "category": "Burgers",
+    "image": "/images/cheeseburger.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Caesar Salad",
+    "price": 7.50,
+    "category": "Salads",
+    "image": "/images/caesar_salad.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Chocolate Brownie",
+    "price": 4.25,    "category": "Desserts",
+    "image": "/images/brownie.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Spaghetti Carbonara",
+    "price": 11.50,
+    "category": "Pasta",
+    "image": "/images/carbonara.jpg"
+  },
+  {
+    "id": 6,
+    "name": "French Fries",
+    "price": 3.99,
+    "category": "Snacks",
+    "image": "/images/fries.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Mango Smoothie",
+    "price": 5.25,
+    "category": "Drinks",
+    "image": "/images/mango_smoothie.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Fried Shrimp",
+    "price": 12.99,
+    "category": "Seafood",
+    "image": "/images/fried_shrimp.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Chicken Biryani",
+    "price": 9.99,
+    "category": "Indian",
+    "image": "/images/chicken_biryani.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Veg Noodles",
+    "price": 6.99,
+    "category": "Chinese",
+    "image": "/images/veg_noodles.jpg"
+  },
+  {
+    "id": 11,
+    "name": "Grilled Chicken Sandwich",
+    "price": 7.75,
+    "category": "Sandwiches",
+    "image": "/images/grilled_chicken_sandwich.jpg"
+  },
+  {
+    "id": 12,
+    "name": "Pancakes with Syrup",
+    "price": 6.50,
+    "category": "Breakfast",
+    "image": "/images/pancakes.jpg"
+  },
+  {
+    "id": 13,
+    "name": "Veggie Wrap",
+    "price": 6.20,
+    "category": "Vegan",
+    "image": "/images/veggie_wrap.jpg"
+  },
+  {
+    "id": 14,
+    "name": "Kids Chicken Nuggets",
+    "price": 5.00,
+    "category": "Kids Menu",
+    "image": "/images/kids_nuggets.jpg"
+  }
+  
 ]
