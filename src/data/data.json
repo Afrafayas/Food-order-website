@@ -4,34 +4,39 @@
     "name": "Margherita Pizza",
     "price": 10.99,
     "category": "Pizza",
-    "image": "/images/margherita.jpg"
+    "image": "/images/margherita.jpg",
+    "featured": true
   },
   {
     "id": 2,
     "name": "Cheeseburger",
     "price": 8.99,
     "category": "Burgers",
-    "image": "/images/cheeseburger.jpg"
+    "image": "/images/cheeseburger.jpg",
+     "featured": true
   },
   {
     "id": 3,
     "name": "Caesar Salad",
     "price": 7.50,
     "category": "Salads",
-    "image": "/images/caesar_salad.jpg"
+    "image": "/images/caesar_salad.jpg",
+     "featured": true
   },
   {
     "id": 4,
     "name": "Chocolate Brownie",
     "price": 4.25,    "category": "Desserts",
-    "image": "/images/brownie.jpg"
+    "image": "/images/brownie.jpg",
+    "featured": false
   },
   {
     "id": 5,
     "name": "Spaghetti Carbonara",
     "price": 11.50,
     "category": "Pasta",
-    "image": "/images/carbonara.jpg"
+    "image": "/images/carbonara.jpg",
+     "featured": false
   },
   {
     "id": 6,
@@ -39,62 +44,115 @@
     "price": 3.99,
     "category": "Snacks",
     "image": "/images/fries.jpg"
+    , "featured": false
   },
   {
     "id": 7,
     "name": "Mango Smoothie",
     "price": 5.25,
     "category": "Drinks",
-    "image": "/images/mango_smoothie.jpg"
+    "image": "/images/mango_smoothie.jpg",
+    "featured": false
   },
   {
     "id": 8,
     "name": "Fried Shrimp",
     "price": 12.99,
     "category": "Seafood",
-    "image": "/images/fried_shrimp.jpg"
+    "image": "/images/fried_shrimp.jpg",
+    "featured": false
   },
   {
     "id": 9,
     "name": "Chicken Biryani",
     "price": 9.99,
     "category": "Indian",
-    "image": "/images/chicken_biryani.jpg"
+    "image": "/images/chicken_biryani.jpg",
+    "featured": false
+    
   },
   {
     "id": 10,
     "name": "Veg Noodles",
     "price": 6.99,
     "category": "Chinese",
-    "image": "/images/veg_noodles.jpg"
+    "image": "/images/veg_noodles.jpg",
+    "featured": false
   },
   {
     "id": 11,
     "name": "Grilled Chicken Sandwich",
     "price": 7.75,
     "category": "Sandwiches",
-    "image": "/images/grilled_chicken_sandwich.jpg"
+    "image": "/images/grilled_chicken_sandwich.jpg",
+    "featured": false
   },
   {
     "id": 12,
     "name": "Pancakes with Syrup",
     "price": 6.50,
     "category": "Breakfast",
-    "image": "/images/pancakes.jpg"
+    "image": "/images/pancakes.jpg",
+    "featured": false
   },
   {
     "id": 13,
     "name": "Veggie Wrap",
     "price": 6.20,
     "category": "Vegan",
-    "image": "/images/veggie_wrap.jpg"
+    "image": "/images/veggie_wrap.jpg",
+    "featured": false
   },
   {
     "id": 14,
     "name": "Kids Chicken Nuggets",
     "price": 5.00,
     "category": "Kids Menu",
-    "image": "/images/kids_nuggets.jpg"
+    "image": "/images/kids_nuggets.jpg",
+    "featured":false
+  },
+
+  {
+
+    "id": 15,
+    "name": "Hamburger",
+    "price": 5.00,
+    "category": "Burgers",
+    "image": "/images/burgerimage.jpg"
+    ,"featured": false
+  },
+  {
+    
+    "id": 16,
+    "name": "Italian Pizza",
+    "price": 6.00,
+    "category": "Pizza",
+    "image": "/images/italianpizza.jpg","featured": true
+  
+
+  },
+  {
+
+    "id": 17,
+    "name": "Italian Pizza",
+    "price": 7.00,
+    "category": "Pizza",
+    "image": "/images/italianpizza.jpg",
+    "featured": false
+
   }
+  ,
+  {
+    "id": 18,
+    "name": "Chocolate Shake",
+    "price": 7.00,
+    "category": "Drinks",
+    "image": "/images/chocolate_shakeee.jpg","featured": false  
+
+
+  }
+  
+
+
   
 ]
