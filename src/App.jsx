@@ -5,7 +5,7 @@ import HomePage from './pages/HomePage';
 import Menu from './pages/Menu';
 import Cart from './pages/Cart';
 import AboutUs from './pages/AboutUs';
-import ContactUs from './pages/contactUs';
+import ContactUs from './pages/ContactUs';
 import ErrorPage from './pages/ErrorPage';
 import Login from './pages/Login';
 import RootLayout from './Layout/RootLayout';
