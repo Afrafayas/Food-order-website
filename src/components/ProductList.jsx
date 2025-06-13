@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Products from '../data/data.json';
-import ProductCard from './Productcard';
+import ProductCard from './ProductCard';
 import CategoryFilter from './CategoryFilter';
 import SearchBar from './SearchBar'; 
 
