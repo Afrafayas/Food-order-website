@@ -1,20 +1,20 @@
-
 import React from 'react';
 
 const CategoryFilter = ({ categories, selectedCategory, onCategoryChange }) => {
+  const safeCategories = (categories || []).filter(
+    (category) => typeof category === 'string' && category.trim() !== ''
+  );
+
   return (
-    <div className="mb-6">
-      <label htmlFor="category" className="block mb-2 text-lg font-medium">
-        Filter by Category:
-      </label>
+    <div className="mb-4 mt-4">
       <select
         id="category"
         value={selectedCategory}
         onChange={(e) => onCategoryChange(e.target.value)}
-        className="border p-2 rounded w-full md:w-1/3"
+        className="px-4 py-2 w-32 md:w-20 rounded-md border text-text bg-background border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
-        <option value="">All</option>
-        {categories.map((category, index) => (
+        <option  value="">All</option>
+        {safeCategories.map((category, index) => (
           <option key={index} value={category}>
             {category.charAt(0).toUpperCase() + category.slice(1)}
           </option>

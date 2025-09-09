@@ -8,7 +8,7 @@ const HomePage = () => {
   return (
    <> 
 
-   <div className=" text-gray-800 font-sans bg-background p-8">
+   <div className=" text-gray-800 font-sans bg-[#D9D9D9] p-8">
 
     <HeroSection/>
     <FeaturedItems/>

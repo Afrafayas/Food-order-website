@@ -1,28 +1,64 @@
 import React from 'react'
 import menuData from '../data/data.json';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
+import { BiCart } from 'react-icons/bi';
 
 const FeaturedItems = () => {
   const featuredItems = menuData.filter(item => item.featured);
 
+  const navigate = useNavigate();
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
+
+   const handleViewMenu = () => {
+    if (!isAuthenticated) {
+      navigate('/login');
+    } else if (user?.role === 'user') {
+      navigate('/user-panel/menu');
+    }
+  };
+
+
+  const handleAddToCart = (item) => {
+    // TODO: dispatch add-to-cart action
+   toast.success(`${item.name} added to cart!`);
+  };
+
   return (
     <>
-      <section className="py-10 px-4 bg-gray-100 text-center">
-        <h2 className="text-3xl font-bold mb-6">Best Sellers</h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <section className="py-10 px-4 bg-[#D9D9D9] text-center">
+        <h2 className="text-3xl font-bold mb-6">Featured Best Sellers</h2>
+        {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-5"> */}
+         <div className="grid gap-5 grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))]">
           {featuredItems?.map(item => (
-            <div key={item?.id} className="bg-white rounded-xl shadow p-4 hover:shadow-lg transition-shadow duration-300">
-              {item.image && (
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="rounded-md mb-2 w-full h-40 object-cover"
-                />
-              )}
-              <h3 className="text-xl font-semibold">{item.name}</h3>
-              <p className="text-yellow-600 font-bold">${item.price.toFixed(2)}</p>
-            </div>
+           <div key={item?.id} className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition p-4 flex flex-col">
+  {item.image && (
+    <img
+      src={item.image}
+      alt={item.name}
+      className="rounded-xl mb-3 w-full h-40 object-cover"
+    />
+  )}
+  <h3 className="text-lg font-semibold text-gray-800">{item.name}</h3>
+  <p className="text-blue-600 font-bold mt-1">${item.price.toFixed(2)}</p>
+
+  {isAuthenticated && user?.role === 'user' && (
+    <button
+      onClick={() => handleAddToCart(item)}
+      className="mt-3 flex items-center justify-center gap-2 bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white font-medium px-4 py-2 rounded-lg transition"
+    >
+      <BiCart size={20} />
+      <span>Add to Cart</span>
+    </button>
+  )}
+</div>
+
           ))}
         </div>
+        <button onClick={handleViewMenu} className="mt-8 bg-red-500 hover:bg-red-700 *:   text-white px-6 py-2 rounded-lg shadow">
+             View Full Menu
+        </button>
       </section>
     </>
   )

@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 
 const AdminLayout = () => {
   return (
-    <div className="flex bg-gray-50 min-h-screen">
+    <div className="flex  bg-gray-50 min-h-screen">
 
 
 
@@ -14,7 +14,7 @@ const AdminLayout = () => {
       
 
       {/* Main Content */}
-      <main className="w-4/5 p-6">
+      <main className="w-full p-6">
         <Outlet />
       </main>
     </div>

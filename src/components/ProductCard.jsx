@@ -1,42 +1,42 @@
-  import React from 'react';
-  import dummyImage from '../assets/no-image.jpg';
+import React from 'react';
+import dummyImage from '../assets/no-image.jpg';
+import { BiCart } from 'react-icons/bi';
 
-
-  const ProductCard = ({ id, image, name, category, price }) => {
-    return (
-      <div className='border p-4 rounded-lg bg-white hover:shadow-md transition text-center h-full flex flex-row md:flex-col'>
-      
-        <div className='w-full h-48 overflow-hidden'>
-          {(image&&(<img src={image}
-          alt={name} 
+const ProductCard = ({ image, name, category, price, onAddToCart }) => {
+  return (
+    <div className="flex flex-col bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 " 
+    >
+      {/* Product Image */}
+      <div className=" w-full h-48 md:h-56">
+        <img
+          src={image || dummyImage}
           onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = dummyImage;
-                  
-                }} 
-          className='object-cover w-full h-full rounded' />))
-
-          ||
-
-          (<img src={dummyImage} 
-            alt="No product available" 
-            className="object-cover w-full h-full rounded" />)
-          
-          }
-    
-  </div>
-
-      
-        <div className='flex flex-col flex-1 justify-between p-4 w-full md:w-full'>
-          <h2 className="mt-4 text-md font-semibold">{name}</h2>
-          <h4 className='text-gray-500'>{category}</h4>   
-          <p className="text-blue-600 font-bold mb-4">${price}</p> 
-
-          
-          
-        </div>
+            e.target.onerror = null;
+            e.target.src = dummyImage;
+          }}
+          alt={name}
+          className="w-full h-full object-cover"
+        />
       </div>
-    );
-  };
 
-  export default ProductCard;
+      {/* Product Details */}
+      <div className="p-4 flex flex-col flex-grow">
+        <h2 className="text-lg font-semibold text-gray-800 truncate">{name}</h2>
+        <p className="text-sm text-gray-500">{category}</p>
+        <p className="text-xl font-bold text-blue-600 mt-2">${price}</p>
+
+        {/* Button */}
+        <button
+        onClick={onAddToCart}
+        className="mt-4 flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded transition"
+        >
+          <BiCart size={20} /> 
+        <span>Add to Cart</span>
+        </button>
+
+      </div>
+    </div>
+  );
+};
+
+export default ProductCard;
