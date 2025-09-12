@@ -3,6 +3,14 @@
 @tailwind utilities;
 
 
+html, body {
+  overflow-x: hidden; /* stops horizontal scroll on small screens */
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
 
 
 

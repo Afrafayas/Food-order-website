@@ -17,7 +17,7 @@ const UserDashboard = () => {
   return (
     <>
 
-     <div className="bg-background p-8">
+     <div className=" w-full bg-background p-8">
      
     <HeroSection/>
     <FeaturedItems/>

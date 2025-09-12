@@ -1,10 +1,12 @@
+
 import React, { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/authSlice";
 import { Menu, X } from "lucide-react";
 import ConfirmDialogue from "../components/ConfirmDialogue";
-const Navbar = () => {
+
+const Navbar = ({ darkMode, setDarkMode }) => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,7 +21,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-neutral-900 shadow-md p-4">
+    <nav className="w-full bg-neutral-900 shadow-md p-4">
       {/* Desktop / Mobile wrapper */}
       <div className="flex justify-between items-center">
         {/* Logo */}
@@ -53,8 +55,23 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Desktop Auth */}
+        {/* Desktop Auth + Dark Mode */}
         <div className="hidden md:flex items-center gap-4">
+          {/* Dark mode toggle */}
+          
+
+          <button
+          onClick={() => setDarkMode(!darkMode)}
+          className="relative inline-flex items-center h-6 w-11 rounded-full transition-colors duration-300 focus:outline-none bg-gray-300 dark:bg-gray-600"
+          >
+            {/* Circle */}
+            <span
+            className={`inline-block h-4 w-4 transform bg-white rounded-full shadow-md transition-transform duration-300 ${
+            darkMode ? "translate-x-5" : "translate-x-1"
+            }`}
+            />
+          </button>
+
           {isAuthenticated ? (
             <>
               <span className="text-sm text-gray-300">
@@ -85,6 +102,14 @@ const Navbar = () => {
       {/* Mobile menu */}
       {mobileMenuOpen && (
         <div className="md:hidden mt-4 flex flex-col gap-2 text-white text-sm">
+          {/* Dark mode toggle */}
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-800 dark:text-white"
+          >
+            {darkMode ? "☀️ Light" : "🌙 Dark"}
+          </button>
+
           {!isAuthenticated && (
             <>
               <NavLink to="/" end onClick={() => setMobileMenuOpen(false)}>Home</NavLink>
@@ -107,6 +132,7 @@ const Navbar = () => {
               <NavLink to="/admin-panel/products" onClick={() => setMobileMenuOpen(false)}>Products</NavLink>
             </>
           )}
+
           {isAuthenticated ? (
             <button
               onClick={() => { setMobileMenuOpen(false); setLogoutDialogOpen(true); }}
@@ -139,3 +165,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

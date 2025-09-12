@@ -22,7 +22,7 @@ const Cart = () => {
 }, 0);
 
   return (<>
-     <div className="bg-background min-h-screen p-8">
+     <div className="w-full bg-background min-h-screen p-8">
   <div className="p-4 sm:p-8 max-w-4xl mx-auto">
     {cart.length === 0 ? (
       <p className="text-center text-gray-500">Your cart is empty.</p>

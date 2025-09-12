@@ -3,7 +3,7 @@ import React from 'react'
 
 const ErrorPage = () => {
   return (
-    <><div className="bg-background p-8"></div>
+    <><div className="w-full bg-background p-8"></div>
 
     <Library/>
     </>

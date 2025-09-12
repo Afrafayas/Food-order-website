@@ -20,7 +20,7 @@ function ContactUs() {
   };
 
   return (
-    <div className="bg-background min-h-screen py-10 px-4 text-text transition-colors duration-300">
+    <div className=" w-full bg-background min-h-screen py-10 px-4 text-text transition-colors duration-300">
   <section className="max-w-xl p-6  container px-5 py-24 mx-auto  ">
     <h2 className="text-3xl font-bold text-center mb-6">Contact Us</h2>
 
