@@ -104,10 +104,15 @@ const Navbar = ({ darkMode, setDarkMode }) => {
         <div className="md:hidden mt-4 flex flex-col gap-2 text-white text-sm">
           {/* Dark mode toggle */}
           <button
-            onClick={() => setDarkMode(!darkMode)}
-            className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-800 dark:text-white"
+          onClick={() => setDarkMode(!darkMode)}
+          className="relative inline-flex items-center h-6 w-11 rounded-full transition-colors duration-300 focus:outline-none bg-gray-300 dark:bg-gray-600"
           >
-            {darkMode ? "☀️ Light" : "🌙 Dark"}
+            {/* Circle */}
+            <span
+            className={`inline-block h-4 w-4 transform bg-white rounded-full shadow-md transition-transform duration-300 ${
+            darkMode ? "translate-x-5" : "translate-x-1"
+            }`}
+            />
           </button>
 
           {!isAuthenticated && (
