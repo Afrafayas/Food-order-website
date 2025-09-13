@@ -20,7 +20,7 @@ const FeaturedItems = () => {
   };
 
   return (
-    <section className="py-10 px-4 bg-[#D9D9D9] text-center">
+    <section className="w-full py-10 px-4 bg-[#D9D9D9] text-center">
       <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
         Featured Best Sellers
       </h2>
