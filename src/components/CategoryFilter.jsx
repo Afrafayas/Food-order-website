@@ -6,14 +6,14 @@ const CategoryFilter = ({ categories, selectedCategory, onCategoryChange }) => {
   );
 
   return (
-    <div className="mb-4 mt-4">
+    <div>
       <select
         id="category"
         value={selectedCategory}
         onChange={(e) => onCategoryChange(e.target.value)}
-        className="px-4 py-2 w-32 md:w-20 rounded-md border text-text bg-background border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="px-4 py-2 w-full rounded-md border text-text bg-background border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
-        <option  value="">All</option>
+        <option value="">All</option>
         {safeCategories.map((category, index) => (
           <option key={index} value={category}>
             {category.charAt(0).toUpperCase() + category.slice(1)}
