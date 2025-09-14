@@ -15,7 +15,7 @@ const HeroSection = () => {
 
   return (
     <section
-      className="bg-cover bg-center min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] lg:min-h-[90vh] flex items-center justify-center text-white"
+      className="w-full h-screen flex items-center justify-center bg-cover bg-center text-white"
       style={{ backgroundImage: "url('/images/banner.jpg')" }}
     >
       <div className="text-center bg-black bg-opacity-60 px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10 rounded-lg max-w-full sm:max-w-md md:max-w-lg">

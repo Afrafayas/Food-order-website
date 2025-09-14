@@ -95,9 +95,15 @@ const Navbar = ({ darkMode, setDarkMode }) => {
 
         {/* Mobile Hamburger */}
         <div className="md:hidden flex items-center gap-2 text-text dark:text-text">
-      <span className="text-sm text-text dark:text-text">
-        Hello, <span className="font-bold text-blue-500 dark:text-blue-400">{user?.username}</span>
-      </span>
+      {user?.username && (
+  <span className="text-sm text-text dark:text-text">
+    Hello,{" "}
+    <span className="font-bold text-blue-500 dark:text-blue-400">
+      {user.username}
+    </span>
+  </span>
+)}
+
 
       <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
 

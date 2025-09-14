@@ -53,17 +53,14 @@ const ProductList = () => {
   return (
     <div className="w-full flex flex-col">
       {/* Top Bar */}
+{/* Top Bar */}
 <div className="bg-blue-800 mb-4 py-3">
-  {/* Centered container with max width */}
-  <div className="flex flex-row items-center justify-between
-                  gap-4 w-full max-w-4xl mx-auto px-4">
-    {/* Search Bar */}
-    <div className="flex-1 min-w-[150px]">
+  <div className="flex flex-row items-center justify-between gap-4 w-full max-w-4xl mx-auto px-4">
+    <div className="flex-1 min-w-[150px] h-full">
       <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
     </div>
 
-    {/* Category Filter */}
-    <div className="flex-1 min-w-[150px] text-white">
+    <div className="flex-1 min-w-[150px] h-full text-white">
       <CategoryFilter
         categories={categories}
         selectedCategory={selectedCategory}
@@ -72,6 +69,7 @@ const ProductList = () => {
     </div>
   </div>
 </div>
+
 
 
 

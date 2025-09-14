@@ -8,10 +8,12 @@ const RootLayout = ({ darkMode, setDarkMode }) => {
 
   return (
     <>
-       <Navbar darkMode={darkMode} setDarkMode={setDarkMode} /> 
+       <div className="pt-16">
+  <Navbar darkMode={darkMode} setDarkMode={setDarkMode} /> 
       <main>
         <Outlet />
       </main>
+      </div>
     </>
   );
 };

@@ -16,7 +16,7 @@ const getCartQuantity = (id) =>{ const itemInCart = cart.find(prod => prod?.id =
 
 
   return (
-   <> <div className=" w-full pt-16 bg-background text-text">      
+   <> <div className=" w-full pt-0 bg-background text-text">      
 
     <ProductList/>
      </div>
