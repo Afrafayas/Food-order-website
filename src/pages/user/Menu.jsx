@@ -1,27 +1,33 @@
-
-
-import React from 'react'
-import ProductList from '../../components/ProductList'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../../redux/productSlice';
+import ProductList from '../../components/ProductList';
 
 const Menu = () => {
+  const dispatch = useDispatch();
+  const { products, loading, error } = useSelector((state) => state.products);
 
-const getCartQuantity = (id) =>{ const itemInCart = cart.find(prod => prod?.id === id);
-  return itemInCart?.quantity || 0;}
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
-  // cart.find(prod=>prod?.id===id) || 0
+  if (loading) return (
+    <div className="flex justify-center items-center h-screen">
+      <p className="text-orange-500 text-xl font-bold">Loading...</p>
+    </div>
+  );
 
-  // console.log(getCartQuantity,'qqq')
-
-  
-
+  if (error) return (
+    <div className="flex justify-center items-center h-screen">
+      <p className="text-red-500 text-xl">{error}</p>
+    </div>
+  );
 
   return (
-   <> <div className=" w-full pt-0 bg-background text-text">      
+    <div className="w-full pt-0 bg-background text-text">
+      <ProductList products={products} />
+    </div>
+  );
+};
 
-    <ProductList/>
-     </div>
-    </>
-  )
-}
-
-export default Menu
+export default Menu;

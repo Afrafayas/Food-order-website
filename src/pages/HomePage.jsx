@@ -1,12 +1,16 @@
 import React from 'react';
 import HeroSection from '../components/HeroSection';
+import CategoriesSection from '../components/CategoriesSection';
 import FeaturedItems from '../components/FeaturedItems';
+import HowItWorks from '../components/HowItWorks';
 
 const HomePage = () => {
   return (
-    <div className="w-full text-gray-800 font-sans bg-background px-4 sm:px-6 md:px-8">
+    <div className="w-full font-sans">
       <HeroSection />
+      <CategoriesSection />
       <FeaturedItems />
+      <HowItWorks />
     </div>
   );
 };

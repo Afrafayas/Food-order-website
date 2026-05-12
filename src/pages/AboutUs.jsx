@@ -1,95 +1,129 @@
-
-import React from "react";
-import chefImage from "../assets/chef.jpg";
-import restImage from "../assets/restaurentinterior.jpg";
-import { useNavigate } from "react-router-dom";
-import TriangleBackground from "../components/TriangleBackground";
+import React from 'react';
+import chefImage from '../assets/chef.jpg';
+import restImage from '../assets/restaurentinterior.jpg';
+import { useNavigate } from 'react-router-dom';
 
 function AboutUs() {
   const navigate = useNavigate();
 
-  const handleContactUsBtn = () => {
-    navigate("/contact");
-  };
-
   return (
-    <>
-      {/* Section 1 */}
-      <section className=" relative w-full bg-background text-text overflow-hidden py-16">
-        <TriangleBackground/>
-        
-        <div className=" container mx-auto mb-0 flex px-5 py-3 md:flex-row flex-col items-center">
-          {/* Left Text */}
-          <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-            <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium">
-              Our Story
-            </h1>
-            <p className="mb-8 leading-relaxed">
-              Welcome to our restaurant! We believe in serving food that not only
+    <div className="w-full font-sans">
+
+      {/* Hero */}
+      <section className="bg-gradient-to-r from-gray-900 to-gray-800 py-20 px-4 text-center">
+        <p className="text-orange-500 font-semibold mb-2">Who We Are</p>
+        <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-4">
+          About <span className="text-orange-500">FoodCorner</span>
+        </h1>
+        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          Delivering happiness, one meal at a time 🍔
+        </p>
+      </section>
+
+      {/* Our Story */}
+      <section className="py-16 px-4 bg-white">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
+          <div className="md:w-1/2">
+            <p className="text-orange-500 font-semibold mb-2">🍽️ Our Story</p>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800 mb-4">
+              Passionate About Food
+            </h2>
+            <p className="text-gray-500 leading-relaxed mb-6">
+              Welcome to FoodCorner! We believe in serving food that not only
               tastes delicious but also brings people together. Our chefs use
               fresh ingredients, traditional techniques, and a passion for flavor
-              to create meals you’ll always remember.
+              to create meals you'll always remember.
             </p>
-            <div className="flex justify-center">
-              <button
-                onClick={handleContactUsBtn}
-                className="ml-4 inline-flex text-gray-700 bg-amber-400 border-0 py-2 px-6 rounded hover:bg-gray-200"
-              >
-                Contact Us
-              </button>
-            </div>
+            <button
+              onClick={() => navigate('/contact')}
+              className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-xl font-semibold transition"
+            >
+              Contact Us →
+            </button>
           </div>
-
-          {/* Right Image */}
-          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+          <div className="md:w-1/2">
             <img
-              className="object-cover object-center rounded shadow-lg"
-              alt="chef plating a dish"
               src={chefImage}
+              alt="Chef"
+              className="w-full rounded-3xl shadow-2xl object-cover h-80"
             />
           </div>
         </div>
-        
       </section>
 
-      {/* Section 2 */}
-      <section className=" relative bg-background text-text overflow-hidden py-16">
-       <TriangleBackground flipped/>
-        
+      {/* Stats */}
+      <section className="py-12 px-4 bg-orange-500">
+        <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          {[
+            { number: '50+', label: 'Menu Items' },
+            { number: '1000+', label: 'Happy Customers' },
+            { number: '30 min', label: 'Avg Delivery' },
+            { number: '4.8⭐', label: 'Rating' },
+          ].map((stat, index) => (
+            <div key={index}>
+              <p className="text-4xl font-extrabold text-white">{stat.number}</p>
+              <p className="text-orange-100 font-medium mt-1">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-        <div className=" container mx-auto flex px-5 py-3  mb-0 md:flex-row flex-col-reverse items-center">
-          {/* Left Image */}
-          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
-            <img
-              className="object-cover object-center rounded shadow-lg"
-              alt="restaurant"
-              src={restImage}
-            />
-          </div>
-
-          {/* Right Text */}
-          <div className="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
-            <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium">
-              Our Journey
-            </h1>
-            <p className="mb-8 leading-relaxed">
+      {/* Our Journey */}
+      <section className="py-16 px-4 bg-gray-50">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row-reverse items-center gap-12">
+          <div className="md:w-1/2">
+            <p className="text-orange-500 font-semibold mb-2">📖 Our Journey</p>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800 mb-4">
+              From Small Kitchen to Big Dreams
+            </h2>
+            <p className="text-gray-500 leading-relaxed mb-4">
               Founded in 2023, FoodCorner started as a small online kitchen with a
               big dream: to bring restaurant-quality meals straight to your home.
               With a passion for fresh ingredients, bold flavors, and exceptional
               service, we quickly grew into a community favorite.
-              <br />
-              <br />
-              From our humble beginnings, we’ve focused on innovation,
-              sustainability, and making every meal an experience to remember. Our
-              chefs, delivery team, and staff work together to ensure every order
-              is crafted with care and delivered with a smile.
             </p>
+            <p className="text-gray-500 leading-relaxed">
+              From our humble beginnings, we've focused on innovation,
+              sustainability, and making every meal an experience to remember.
+              Our chefs, delivery team, and staff work together to ensure every
+              order is crafted with care and delivered with a smile.
+            </p>
+          </div>
+          <div className="md:w-1/2">
+            <img
+              src={restImage}
+              alt="Restaurant"
+              className="w-full rounded-3xl shadow-2xl object-cover h-80"
+            />
           </div>
         </div>
       </section>
-    </>
+
+      {/* Values */}
+      <section className="py-16 px-4 bg-gray-900">
+        <div className="max-w-6xl mx-auto text-center mb-12">
+          <p className="text-orange-500 font-semibold mb-2">💡 Our Values</p>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white">
+            What We Stand For
+          </h2>
+        </div>
+        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {[
+            { icon: '🌿', title: 'Fresh Ingredients', desc: 'We use only the freshest, locally-sourced ingredients in every dish.' },
+            { icon: '⚡', title: 'Fast Delivery', desc: 'Hot meals delivered to your door in 30 minutes or less.' },
+            { icon: '❤️', title: 'Made with Love', desc: 'Every dish is prepared with passion and care by our expert chefs.' },
+          ].map((value, index) => (
+            <div key={index} className="bg-gray-800 rounded-2xl p-6 text-center hover:bg-gray-700 transition">
+              <span className="text-5xl mb-4 block">{value.icon}</span>
+              <h3 className="text-white font-bold text-xl mb-2">{value.title}</h3>
+              <p className="text-gray-400 text-sm">{value.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+    </div>
   );
 }
 
 export default AboutUs;
-
