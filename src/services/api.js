@@ -4,7 +4,7 @@ const API = axios.create({
   baseURL: 'http://localhost:5001/api',
 });
 
-// Every request-ൽ token auto add ചെയ്യും
+
 API.interceptors.request.use((config) => {
   const auth = JSON.parse(localStorage.getItem('auth'));
   if (auth?.token) {
@@ -12,6 +12,18 @@ API.interceptors.request.use((config) => {
   }
   return config;
 });
+
+// Response interceptor:
+API.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('auth');
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  }
+);
 
 // Auth
 export const registerUser = (data) => API.post('/auth/register', data);
@@ -44,3 +56,22 @@ export const getAllOrders = () => API.get('/orders');
 
 // Payment
 export const createPaymentIntent = (data) => API.post('/payment/create-payment-intent', data);  
+
+// Banners:
+export const getBanners = () => API.get('/banners');
+
+// Reviews:
+export const getReviews = (productId) => API.get(`/reviews/product/${productId}`);
+export const createReview = (data) => API.post('/reviews', data);
+export const deleteReview = (id) => API.delete(`/reviews/${id}`);
+
+// Wishlist:
+export const getWishlist = () => API.get('/wishlist');
+export const toggleWishlist = (productId) => API.post(`/wishlist/${productId}`);
+export const checkWishlist = (productId) => API.get(`/wishlist/${productId}/check`);
+
+// Promo:
+export const validatePromo = (data) => API.post('/promo/validate', data);
+
+// Offers:
+export const getActiveOffer = () => API.get('/offers/active');

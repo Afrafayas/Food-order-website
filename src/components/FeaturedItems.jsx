@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts } from '../redux/productSlice';
 import { addToCart } from '../redux/cartSlice';
+import ProductCard from './ProductCard';
 import toast from 'react-hot-toast';
 
 const FeaturedItems = () => {
@@ -63,54 +64,12 @@ const FeaturedItems = () => {
 
         {/* Cards */}
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-          {featuredItems.map((item, index) => (
-            <div
+          {featuredItems.map((item) => (
+            <ProductCard
               key={item._id}
-              className="group relative bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
-            >
-              {/* Badge */}
-              {index === 0 && (
-                <div className="absolute top-3 left-3 z-10 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">
-                  🏆 Best Seller
-                </div>
-              )}
-
-              {/* Image */}
-              <div className="relative h-52 overflow-hidden">
-                <img
-                  src={item.image || '/no-image.jpg'}
-                  alt={item.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-              </div>
-
-              {/* Info */}
-              <div className="p-5">
-                <p className="text-xs text-orange-500 font-semibold uppercase tracking-wide mb-1">
-                  {item.category?.name}
-                </p>
-                <h3 className="text-lg font-bold text-gray-800 mb-1">{item.name}</h3>
-                <p className="text-gray-400 text-sm mb-4 line-clamp-1">
-                  {item.description || 'Fresh & delicious!'}
-                </p>
-
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-extrabold text-orange-500">
-                    AED {item.price}
-                  </span>
-
-                  {isAuthenticated && user?.role === 'user' && (
-                    <button
-                      onClick={() => handleAddToCart(item)}
-                      className="bg-orange-500 hover:bg-orange-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold transition shadow-lg shadow-orange-200"
-                    >
-                      +
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
+              item={item}
+              onAddToCart={() => handleAddToCart(item)}
+            />
           ))}
         </div>
 

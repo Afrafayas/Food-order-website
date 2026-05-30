@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCart, addToCart, removeFromCart, clearCart, decreaseQuantity } from "../../redux/cartSlice";
-import { createOrder } from "../../services/api";
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,17 +13,24 @@ const Cart = () => {
     dispatch(fetchCart());
   }, [dispatch]);
 
-  const handleRemove = (productId) => {
-    dispatch(removeFromCart(productId));
+  const handleRemove = (item) => {
+    if (!item?.product) return;
+    dispatch(removeFromCart(item.product._id || item.product));
     toast.success('Item removed!');
   };
 
   const handleAddMore = (item) => {
+    if (!item?.product) return;
     dispatch(addToCart({
       productId: item.product._id || item.product,
       quantity: 1,
       price: item.price,
     }));
+  };
+
+  const handleDecrease = (item) => {
+    if (!item?.product) return;
+    dispatch(decreaseQuantity(item.product._id || item.product));
   };
 
   const handleProceedToCheckout = () => {
@@ -62,8 +68,9 @@ const Cart = () => {
                   {/* Image */}
                   <img
                     src={item.product?.image || '/no-image.jpg'}
-                    alt={item.product?.name}
+                    alt={item.product?.name || 'Product'}
                     className="w-24 h-24 object-cover rounded-lg"
+                    onError={(e) => { e.target.src = '/no-image.jpg'; }}
                   />
 
                   {/* Info */}
@@ -79,7 +86,7 @@ const Cart = () => {
                   {/* Quantity Controls */}
                   <div className="flex items-center gap-3">
                     <button
-                      onClick={() => dispatch(decreaseQuantity(item.product._id || item.product))}
+                      onClick={() => handleDecrease(item)}
                       className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg"
                     >
                       -
@@ -92,7 +99,7 @@ const Cart = () => {
                       +
                     </button>
                     <button
-                      onClick={() => handleRemove(item.product._id || item.product)}
+                      onClick={() => handleRemove(item)}
                       className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded-lg ml-2"
                     >
                       🗑️
@@ -118,12 +125,12 @@ const Cart = () => {
                 <span className="text-orange-500">AED {totalPrice.toFixed(2)}</span>
               </div>
 
-              <button 
-              onClick={handleProceedToCheckout}
-              className="w-full mt-4 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-xl transition"
-            >
-              Proceed to Checkout →
-            </button>
+              <button
+                onClick={handleProceedToCheckout}
+                className="w-full mt-4 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-xl transition"
+              >
+                Proceed to Checkout →
+              </button>
 
               <button
                 onClick={() => dispatch(clearCart())}
