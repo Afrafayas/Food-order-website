@@ -1,20 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import * as nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 @Injectable()
 export class EmailService {
-  private transporter;
+  private resend: Resend;
 
   constructor() {
-    this.transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
-      auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS,
-      },
-    });
+    this.resend = new Resend(process.env.RESEND_API_KEY);
   }
 
   generateOTP(): string {
@@ -22,8 +14,8 @@ export class EmailService {
   }
 
   async sendOTP(email: string, otp: string): Promise<void> {
-    await this.transporter.sendMail({
-      from: `"Food Order App" <${process.env.MAIL_USER}>`,
+    await this.resend.emails.send({
+      from: 'FoodCorner <onboarding@resend.dev>',
       to: email,
       subject: 'Your OTP Code',
       html: `
