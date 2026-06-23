@@ -118,7 +118,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
                 <Link to="/user-panel/cart" className="relative text-gray-400 hover:text-orange-400 transition w-9 h-9 rounded-xl hover:bg-white/5 flex items-center justify-center border border-transparent hover:border-white/5" title="Cart">
                   <ShoppingCart size={18} />
                   {cartCount > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-[9px] w-4.5 h-4.5 rounded-full flex items-center justify-center font-black shadow-lg shadow-orange-500/30 border border-[#0a0f1e]">
+                    <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-[9px] w-5 h-5 rounded-full flex items-center justify-center font-black shadow-lg shadow-orange-500/30 border-2 border-background">
                       {cartCount > 9 ? '9+' : cartCount}
                     </span>
                   )}
@@ -155,7 +155,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
               <Link to="/user-panel/cart" className="relative text-gray-400 hover:text-orange-400 transition w-9 h-9 rounded-xl hover:bg-white/5 flex items-center justify-center border border-transparent hover:border-white/5">
                 <ShoppingCart size={18} />
                 {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-[9px] w-4.5 h-4.5 rounded-full flex items-center justify-center font-black border border-[#0a0f1e]">
+                  <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-[9px] w-5 h-5 rounded-full flex items-center justify-center font-black border-2 border-background">
                     {cartCount > 9 ? '9+' : cartCount}
                   </span>
                 )}
