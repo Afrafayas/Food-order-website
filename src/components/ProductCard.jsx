@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { toggleWishlist, checkWishlist } from '../services/api';
 import { Heart, ShoppingCart, Star } from 'lucide-react';
 import dummyImage from '../assets/no-image.jpg';
@@ -49,6 +50,7 @@ const dealTagColors = {
 const ProductCard = ({ item, onAddToCart }) => {
   const { timeLeft, expired } = useCountdown(item.dealExpiry);
   const { isAuthenticated } = useSelector(state => state.auth);
+  const navigate = useNavigate();
   const [inWishlist, setInWishlist] = useState(false);
 
   const {
@@ -82,7 +84,10 @@ const ProductCard = ({ item, onAddToCart }) => {
   };
 
   return (
-    <div className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100">
+    <div
+      onClick={() => navigate(`/user-panel/product/${_id}`)}
+      className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100 cursor-pointer"
+    >
 
       {/* Image */}
       <div className="relative h-36 overflow-hidden">
@@ -173,7 +178,7 @@ const ProductCard = ({ item, onAddToCart }) => {
             )}
           </div>
           <button
-            onClick={onAddToCart}
+            onClick={e => { e.stopPropagation(); onAddToCart(); }}
             disabled={stock === 0}
             className="bg-orange-500 hover:bg-orange-600 disabled:bg-gray-300 text-white w-7 h-7 rounded-full flex items-center justify-center transition"
           >

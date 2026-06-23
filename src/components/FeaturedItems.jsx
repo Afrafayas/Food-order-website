@@ -16,7 +16,7 @@ const FeaturedItems = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  const featuredItems = products.slice(0, 4);
+  const featuredItems = products.slice(0, 8);
 
   const handleViewMenu = () => {
     if (!isAuthenticated) return navigate('/login');
@@ -63,7 +63,7 @@ const FeaturedItems = () => {
         </div>
 
         {/* Cards */}
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
           {featuredItems.map((item) => (
             <ProductCard
               key={item._id}

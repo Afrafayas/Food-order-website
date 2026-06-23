@@ -24,8 +24,13 @@ const authSlice = createSlice({
       state.token = null;
       localStorage.removeItem('auth');
     },
+
+    updateUser: (state, action) => {
+      state.user = { ...state.user, ...action.payload };
+      localStorage.setItem('auth', JSON.stringify(state));
+    },
   }
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout, updateUser } = authSlice.actions;
 export default authSlice.reducer; 

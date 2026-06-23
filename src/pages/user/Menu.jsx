@@ -1,21 +1,29 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 import { fetchProducts } from '../../redux/productSlice';
 import ProductList from '../../components/ProductList';
 
 const Menu = () => {
   const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
   const { products, loading, error } = useSelector((state) => state.products);
+
+  const initialSearch   = searchParams.get('search')   || '';
+  const initialCategory = searchParams.get('category') || 'All';
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  if (loading) return (
-    <div className="flex justify-center items-center h-screen">
-      <p className="text-orange-500 text-xl font-bold">Loading...</p>
-    </div>
-  );
+  // Scroll to products once they load if a search/category was passed in
+  useEffect(() => {
+    if (!loading && (initialSearch || initialCategory !== 'All')) {
+      setTimeout(() => {
+        document.getElementById('products-section')?.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+    }
+  }, [loading]);
 
   if (error) return (
     <div className="flex justify-center items-center h-screen">
@@ -25,7 +33,12 @@ const Menu = () => {
 
   return (
     <div className="w-full pt-0 bg-background text-text">
-      <ProductList products={products} />
+      <ProductList
+        products={products}
+        loading={loading}
+        initialSearch={initialSearch}
+        initialCategory={initialCategory}
+      />
     </div>
   );
 };

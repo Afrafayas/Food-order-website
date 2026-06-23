@@ -26,10 +26,16 @@ import Menu from './pages/user/Menu';
 import Cart from './pages/user/Cart';
 import Checkout from './pages/user/Checkout';
 import Orders from './pages/user/Orders';
+import UserProfile from './pages/user/UserProfile';
+import Wishlist from './pages/user/Wishlist';
+import ProductDetail from './pages/user/ProductDetail';
 
 // Admin Pages
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminProducts from './pages/admin/AdminProducts';
+import AdminOrders from './pages/admin/AdminOrders';
+import AdminUsers from './pages/admin/AdminUsers';
+import AdminBanners from './pages/admin/AdminBanners';
 
 function App() {
   const [darkMode, setDarkMode] = useState(
@@ -63,12 +69,18 @@ function App() {
             <Route path="cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
             <Route path="checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
             <Route path="orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
+            <Route path="profile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
+            <Route path="wishlist" element={<ProtectedRoute><Wishlist /></ProtectedRoute>} />
+            <Route path="product/:id" element={<ProtectedRoute><ProductDetail /></ProtectedRoute>} />
           </Route>
 
           {/* Admin Panel */}
           <Route path="/admin-panel" element={<AdminRoutes><AdminLayout /></AdminRoutes>}>
             <Route index element={<AdminDashboard />} />
             <Route path="products" element={<AdminProducts />} />
+            <Route path="orders" element={<AdminOrders />} />
+            <Route path="users" element={<AdminUsers />} />
+            <Route path="banners" element={<AdminBanners />} />
           </Route>
 
           {/* 404 */}
@@ -76,7 +88,7 @@ function App() {
 
         </Route>
       </Routes>
-      <Toaster />
+      <Toaster position="top-right" />
     </BrowserRouter>
   );
 }

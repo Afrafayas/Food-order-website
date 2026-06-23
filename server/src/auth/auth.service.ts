@@ -109,4 +109,10 @@ export class AuthService {
     if (!user) throw new UnauthorizedException('User not found');
     return user;
   }
+
+  async updateProfile(userId: string, data: { name?: string; phone?: string; address?: string }): Promise<UserDocument> {
+    const user = await this.userModel.findByIdAndUpdate(userId, data, { new: true }).select('-password');
+    if (!user) throw new UnauthorizedException('User not found');
+    return user;
+  }
 }

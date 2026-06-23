@@ -2,25 +2,29 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Wishlist, WishlistDocument } from './wishlist.schema';
+import { Product, ProductDocument } from '../products/product.schema';
 
 @Injectable()
 export class WishlistService {
   constructor(
     @InjectModel(Wishlist.name) private wishlistModel: Model<WishlistDocument>,
+    @InjectModel(Product.name) private productModel: Model<ProductDocument>,
   ) {}
 
-  async getWishlist(userId: string): Promise<Wishlist> {
-    let wishlist = await this.wishlistModel
-      .findOne({ user: userId })
-      .populate('products');
+  async getWishlist(userId: string) {
+    const wishlist = await this.wishlistModel.findOne({ user: userId }).lean();
     if (!wishlist) {
-      wishlist = new this.wishlistModel({ user: userId, products: [] });
-      await wishlist.save();
+      await this.wishlistModel.create({ user: userId, products: [] });
+      return { products: [] };
     }
-    return wishlist;
+    const products = await this.productModel
+      .find({ _id: { $in: wishlist.products } })
+      .populate('category')
+      .lean();
+    return { ...wishlist, products };
   }
 
-  async toggleWishlist(userId: string, productId: string): Promise<Wishlist> {
+  async toggleWishlist(userId: string, productId: string) {
     let wishlist = await this.wishlistModel.findOne({ user: userId });
     if (!wishlist) {
       wishlist = new this.wishlistModel({ user: userId, products: [] });
@@ -31,15 +35,20 @@ export class WishlistService {
     );
 
     if (index === -1) {
-      // Add to wishlist
       wishlist.products.push(productId as any);
     } else {
-      // Remove from wishlist
       wishlist.products.splice(index, 1);
     }
 
     await wishlist.save();
-    return wishlist.populate('products');
+
+    const updatedWishlist = await this.wishlistModel.findById(wishlist._id).lean();
+    if (!updatedWishlist) return { products: [] };
+    const products = await this.productModel
+      .find({ _id: { $in: updatedWishlist.products } })
+      .populate('category')
+      .lean();
+    return { ...updatedWishlist, products };
   }
 
   async isInWishlist(userId: string, productId: string): Promise<boolean> {

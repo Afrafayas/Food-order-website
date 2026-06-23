@@ -4,7 +4,6 @@ const API = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5001/api',
 });
 
-
 API.interceptors.request.use((config) => {
   const auth = JSON.parse(localStorage.getItem('auth'));
   if (auth?.token) {
@@ -13,7 +12,6 @@ API.interceptors.request.use((config) => {
   return config;
 });
 
-// Response interceptor:
 API.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -30,6 +28,7 @@ export const registerUser = (data) => API.post('/auth/register', data);
 export const verifyOTP = (data) => API.post('/auth/verify-otp', data);
 export const loginUser = (data) => API.post('/auth/login', data);
 export const getMe = () => API.get('/auth/me');
+export const updateProfile = (data) => API.put('/auth/profile', data);
 
 // Products
 export const getProducts = () => API.get('/products');
@@ -45,7 +44,7 @@ export const createCategory = (data) => API.post('/categories', data);
 // Cart
 export const getCart = () => API.get('/cart');
 export const addToCart = (data) => API.post('/cart', data);
-export const decreaseCartItem = (productId) => API.put(`/cart/${productId}/decrease`);  
+export const decreaseCartItem = (productId) => API.put(`/cart/${productId}/decrease`);
 export const removeFromCart = (productId) => API.delete(`/cart/${productId}`);
 export const clearCart = () => API.delete('/cart');
 
@@ -53,25 +52,31 @@ export const clearCart = () => API.delete('/cart');
 export const createOrder = (data) => API.post('/orders', data);
 export const getMyOrders = () => API.get('/orders/my-orders');
 export const getAllOrders = () => API.get('/orders');
+export const updateOrderStatus = (id, status) => API.put(`/orders/${id}/status`, { status });
+
+// Users (Admin)
+export const getAllUsers = () => API.get('/users');
 
 // Payment
-export const createPaymentIntent = (data) => API.post('/payment/create-payment-intent', data);  
+export const createPaymentIntent = (data) => API.post('/payment/create-payment-intent', data);
 
-// Banners:
+// Banners
 export const getBanners = () => API.get('/banners');
+export const createBanner = (data) => API.post('/banners', data);
+export const deleteBanner = (id) => API.delete(`/banners/${id}`);
 
-// Reviews:
+// Reviews
 export const getReviews = (productId) => API.get(`/reviews/product/${productId}`);
 export const createReview = (data) => API.post('/reviews', data);
 export const deleteReview = (id) => API.delete(`/reviews/${id}`);
 
-// Wishlist:
+// Wishlist
 export const getWishlist = () => API.get('/wishlist');
 export const toggleWishlist = (productId) => API.post(`/wishlist/${productId}`);
 export const checkWishlist = (productId) => API.get(`/wishlist/${productId}/check`);
 
-// Promo:
+// Promo
 export const validatePromo = (data) => API.post('/promo/validate', data);
 
-// Offers:
+// Offers
 export const getActiveOffer = () => API.get('/offers/active');

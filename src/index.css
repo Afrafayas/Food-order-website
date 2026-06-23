@@ -2,11 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-
-html, body {
-  overflow-x: hidden; /* stops horizontal scroll on small screens */
+/* ── Reset ── */
+html, body, #root {
   margin: 0;
   padding: 0;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 img {
@@ -14,37 +15,76 @@ img {
   height: auto;
 }
 
-
-
- :root {
-   --background-color: #bfbfbf;
-    --text-color: #000;
+/* ── CSS variables ── */
+:root {
+  --background-color: #ffffff;
+  --text-color: #111827;
 }
 
-.dark{
-
- --background-color: #1a1a1a;
-  --text-color: #f5f5f5;
-}
-html, body, #root {
-  margin: 0;
-  padding: 0;
-  height: 100%;
+.dark {
+  --background-color: #0f172a;
+  --text-color: #f1f5f9;
 }
 
+/* ── Smooth theme transition ── */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
 
+/* ════════════════════════════════════════
+   DARK MODE — global Tailwind overrides
+   All selectors are scoped under .dark
+   so light mode is completely unaffected.
+   ════════════════════════════════════════ */
 
-/* Force react-hot-toast portal above everything */
+/* Backgrounds */
+.dark .bg-white          { background-color: #1e293b !important; }
+.dark .bg-gray-50        { background-color: #0f172a !important; }
+.dark .bg-gray-100       { background-color: #1e293b !important; }
+.dark .bg-gray-200       { background-color: #334155 !important; }
+.dark .bg-gray-800       { background-color: #0f172a !important; }
+.dark .bg-gray-900       { background-color: #020617 !important; }
 
+/* Text */
+.dark .text-gray-900     { color: #f1f5f9 !important; }
+.dark .text-gray-800     { color: #e2e8f0 !important; }
+.dark .text-gray-700     { color: #cbd5e1 !important; }
+.dark .text-gray-600     { color: #94a3b8 !important; }
+.dark .text-gray-500     { color: #64748b !important; }
+.dark .text-gray-400     { color: #94a3b8 !important; }
 
+/* Borders */
+.dark .border-gray-100   { border-color: #1e293b !important; }
+.dark .border-gray-200   { border-color: #334155 !important; }
+.dark .border-gray-300   { border-color: #475569 !important; }
 
+/* Cards / Sections that use shadow-sm */
+.dark .shadow-sm         { box-shadow: 0 1px 3px 0 rgba(0,0,0,0.4) !important; }
+.dark .shadow-md         { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5) !important; }
 
+/* Inputs & Textareas */
+.dark input:not([type="checkbox"]):not([type="radio"]),
+.dark textarea,
+.dark select {
+  background-color: #1e293b !important;
+  color: #f1f5f9 !important;
+  border-color: #334155 !important;
+}
 
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #64748b !important;
+}
 
+/* Sticky category bar & search bars */
+.dark .sticky          { background-color: #1e293b !important; }
 
+/* Dividers */
+.dark hr               { border-color: #334155 !important; }
 
-
-
-/* 217 217 217  */
-
-/* #a6a6a6 */
+/* Scrollbar (webkit) */
+.dark ::-webkit-scrollbar       { width: 6px; }
+.dark ::-webkit-scrollbar-track { background: #1e293b; }
+.dark ::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
