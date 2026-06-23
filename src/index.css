@@ -21,6 +21,8 @@ img {
 /* ── CSS variables ── */
 :root {
   --background-color: #f8fafc;
+  --background-rgb: 248, 250, 252;
+  --overlay-bg: rgba(15, 23, 42, 0.45);
   --text-color: #0f172a;
   --text-main: #0f172a;
   --text-muted: #475569;
@@ -35,6 +37,8 @@ img {
 
 .dark {
   --background-color: #0a0f1e;
+  --background-rgb: 10, 15, 30;
+  --overlay-bg: rgba(10, 15, 30, 0.85);
   --text-color: #f8fafc;
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
@@ -76,6 +80,20 @@ body, .bg-gray-50, .bg-gray-50\/30 {
   background-color: var(--background-color) !important;
 }
 
+/* Override hardcoded arbitrary background classes */
+.bg-\[\#0a0f1e\] {
+  background-color: var(--background-color) !important;
+}
+.bg-\[\#10162d\] {
+  background-color: var(--card-bg) !important;
+}
+.bg-\[\#0a0f1e\]\/75 {
+  background-color: rgba(var(--background-rgb), 0.75) !important;
+}
+.bg-\[\#0a0f1e\]\/80 {
+  background-color: var(--overlay-bg) !important;
+}
+
 /* Text */
 .text-gray-900, .text-black, .text-gray-850, .text-gray-800, .text-gray-300, .text-gray-200 {
   color: var(--text-main) !important;
@@ -84,7 +102,12 @@ body, .bg-gray-50, .bg-gray-50\/30 {
   color: var(--text-muted) !important;
 }
 
-/* Logo specific text adjustment */
+/* Contextual Adaptive text-white rule */
+.text-white:not(.btn-glow):not(.btn-gold):not(.bg-orange-500):not(.bg-red-500):not(.badge):not(.UtensilsCrossed):not(svg) {
+  color: var(--text-main) !important;
+}
+
+/* Navbar specific text adjustment */
 nav .text-white.font-black {
   color: var(--text-main) !important;
 }
