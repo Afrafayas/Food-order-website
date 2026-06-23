@@ -9,8 +9,8 @@ html, body, #root {
   height: 100%;
   overflow-x: hidden;
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background-color: #0a0f1e;
-  color: #f8fafc;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 img {
@@ -20,79 +20,90 @@ img {
 
 /* ── CSS variables ── */
 :root {
-  --background-color: #0a0f1e;
-  --text-color: #f8fafc;
+  --background-color: #f8fafc;
+  --text-color: #0f172a;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --card-bg: #ffffff;
+  --card-bg-hover: #f1f5f9;
+  --border-color: #e2e8f0;
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --scrollbar-thumb: #cbd5e1;
+  --skeleton-bg: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
 }
 
 .dark {
   --background-color: #0a0f1e;
   --text-color: #f8fafc;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --card-bg: #10162d;
+  --card-bg-hover: #161c36;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(16, 22, 45, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --scrollbar-thumb: #1f264d;
+  --skeleton-bg: linear-gradient(90deg, #10162d 25%, #1c234a 50%, #10162d 75%);
 }
 
 /* ── Smooth transitions ── */
-body {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
+body, main, div, section, nav, header, footer, aside, button, input, select, textarea {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* ════════════════════════════════════════
-   GLOBAL THEME OVERRIDES — Forcing Deep Dark Navy
-   Makes both light/dark modes look premium navy.
+   GLOBAL THEME OVERRIDES — Dynamically adapts to Light & Dark Navy
    ════════════════════════════════════════ */
 
 /* Backgrounds */
 body, .bg-gray-50, .bg-gray-50\/30 {
-  background-color: #0a0f1e !important;
+  background-color: var(--background-color) !important;
 }
 .bg-white {
-  background-color: #10162d !important;
+  background-color: var(--card-bg) !important;
 }
 .bg-gray-100 {
-  background-color: #161c36 !important;
+  background-color: var(--card-bg-hover) !important;
 }
 .bg-gray-200 {
-  background-color: #1f264d !important;
+  background-color: var(--card-bg-hover) !important;
 }
 .bg-gray-800 {
-  background-color: #0d132b !important;
+  background-color: var(--card-bg) !important;
 }
 .bg-gray-900 {
-  background-color: #070b18 !important;
+  background-color: var(--background-color) !important;
 }
 
 /* Text */
-.text-gray-900, .text-black {
-  color: #f8fafc !important;
+.text-gray-900, .text-black, .text-gray-850, .text-gray-800, .text-gray-300, .text-gray-200 {
+  color: var(--text-main) !important;
 }
-.text-gray-800 {
-  color: #e2e8f0 !important;
+.text-gray-700, .text-gray-600, .text-gray-550, .text-gray-500, .text-gray-400 {
+  color: var(--text-muted) !important;
 }
-.text-gray-700 {
-  color: #cbd5e1 !important;
+
+/* Navbar specific text adjustment */
+nav .text-white {
+  color: var(--text-main) !important;
 }
-.text-gray-600 {
-  color: #94a3b8 !important;
-}
-.text-gray-500 {
-  color: #64748b !important;
-}
-.text-gray-400 {
-  color: #475569 !important;
+.hover\:text-white:hover {
+  color: var(--text-main) !important;
 }
 
 /* Borders */
 .border-gray-100, .border-gray-200, .border-gray-300 {
-  border-color: rgba(255, 255, 255, 0.08) !important;
+  border-color: var(--border-color) !important;
 }
 
 /* Inputs & Forms */
 input:not([type="checkbox"]):not([type="radio"]),
 textarea,
 select {
-  background-color: #161c36 !important;
-  color: #f8fafc !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background-color: var(--card-bg) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border-color) !important;
 }
 input:focus, textarea:focus, select:focus {
   border-color: #ff6b35 !important;
@@ -103,15 +114,16 @@ input:focus, textarea:focus, select:focus {
 
 /* Glassmorphism Panel */
 .glass-panel {
-  background: rgba(16, 22, 45, 0.65) !important;
+  background: var(--glass-bg) !important;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--glass-border) !important;
 }
 
 /* Premium Glowing Buttons */
 .btn-glow {
   background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%) !important;
+  color: #ffffff !important;
   box-shadow: 0 4px 15px rgba(255, 107, 53, 0.35);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -141,10 +153,10 @@ input:focus, textarea:focus, select:focus {
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0f1e;
+  background: var(--background-color);
 }
 ::-webkit-scrollbar-thumb {
-  background: #1f264d;
+  background: var(--scrollbar-thumb);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -153,7 +165,7 @@ input:focus, textarea:focus, select:focus {
 
 /* Skeleton Loading Loader */
 .skeleton {
-  background: linear-gradient(90deg, #10162d 25%, #1c234a 50%, #10162d 75%);
+  background: var(--skeleton-bg);
   background-size: 200% 100%;
   animation: loading-pulse 1.5s infinite;
   border-radius: 0.75rem;
