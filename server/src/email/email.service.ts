@@ -15,7 +15,7 @@ export class EmailService {
 
   async sendOTP(email: string, otp: string): Promise<void> {
     await this.resend.emails.send({
-      from: 'FoodCorner <onboarding@resend.dev>',
+      from: 'BiteCraft <onboarding@resend.dev>',
       to: email,
       subject: 'Your OTP Code',
       html: `

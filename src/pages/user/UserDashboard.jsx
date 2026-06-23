@@ -26,10 +26,10 @@ const WHY_US = [
 ];
 
 const TESTIMONIALS = [
-  { name: 'Sarah M.',   rating: 5, text: 'Absolutely love FoodCorner! The food always arrives hot and the app is super easy to use.', avatar: '👩‍💼', location: 'Abu Dhabi' },
+  { name: 'Sarah M.',   rating: 5, text: 'Absolutely love BiteCraft! The food always arrives hot and the app is super easy to use.', avatar: '👩‍💼', location: 'Abu Dhabi' },
   { name: 'Ahmed K.',   rating: 5, text: 'Best food delivery in Abu Dhabi. The burgers are incredible and delivery is always on time.', avatar: '👨‍💻', location: 'Dubai' },
   { name: 'Priya R.',   rating: 4, text: 'Great variety of food and excellent customer service. Will definitely order again!', avatar: '👩‍🍳', location: 'Sharjah' },
-  { name: 'Omar S.',    rating: 5, text: 'I order from FoodCorner almost every day. The sushi platter is absolutely amazing!', avatar: '👨‍🎨', location: 'Abu Dhabi' },
+  { name: 'Omar S.',    rating: 5, text: 'I order from BiteCraft almost every day. The sushi platter is absolutely amazing!', avatar: '👨‍🎨', location: 'Abu Dhabi' },
   { name: 'Fatima H.',  rating: 5, text: 'Fast, fresh, and always accurate. Never had a wrong order. Highly recommended!', avatar: '👩‍🔬', location: 'Al Ain' },
   { name: 'Raj P.',     rating: 4, text: 'The app is sleek and the food quality is consistently great. Love the promo codes!', avatar: '👨‍🏫', location: 'Dubai' },
 ];
@@ -252,7 +252,7 @@ const UserDashboard = () => {
               Passionate About <span className="text-orange-400">Great Food</span>
             </h2>
             <p className="text-gray-400 text-lg leading-relaxed mb-6">
-              FoodCorner started in 2019 with one simple mission — to bring the best local restaurant meals to your door, fresh and fast. What began as a small team of food lovers has grown into Abu Dhabi's most loved food delivery platform.
+              BiteCraft started in 2019 with one simple mission — to bring the best local restaurant meals to your door, fresh and fast. What began as a small team of food lovers has grown into Abu Dhabi's most loved food delivery platform.
             </p>
             <p className="text-gray-400 leading-relaxed mb-8">
               We work directly with local chefs and restaurants to ensure every dish meets our quality standards. No shortcuts, no compromises — just great food delivered with care.
@@ -296,7 +296,7 @@ const UserDashboard = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <p className="text-orange-500 font-semibold text-sm uppercase tracking-widest mb-2">Our Promise</p>
-            <h2 className="text-4xl font-extrabold text-gray-800">Why Choose FoodCorner?</h2>
+            <h2 className="text-4xl font-extrabold text-gray-800">Why Choose BiteCraft?</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {WHY_US.map(({ icon, title, desc }) => (

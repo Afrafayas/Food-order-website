@@ -75,7 +75,7 @@ const LoginForm = () => {
 
         {/* Logo */}
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold text-orange-500">🍔 FoodCorner</h1>
+          <h1 className="text-3xl font-bold text-orange-500">🍔 BiteCraft</h1>
           <p className="text-gray-500 text-sm mt-1">Delicious food at your doorstep</p>
         </div>
 

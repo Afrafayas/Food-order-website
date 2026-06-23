@@ -13,7 +13,7 @@ function AboutUs() {
       <section className="bg-gradient-to-r from-gray-900 to-gray-800 py-20 px-4 text-center">
         <p className="text-orange-500 font-semibold mb-2">Who We Are</p>
         <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-4">
-          About <span className="text-orange-500">FoodCorner</span>
+          About <span className="text-orange-500">BiteCraft</span>
         </h1>
         <p className="text-gray-400 text-lg max-w-2xl mx-auto">
           Delivering happiness, one meal at a time 🍔
@@ -29,7 +29,7 @@ function AboutUs() {
               Passionate About Food
             </h2>
             <p className="text-gray-500 leading-relaxed mb-6">
-              Welcome to FoodCorner! We believe in serving food that not only
+              Welcome to BiteCraft! We believe in serving food that not only
               tastes delicious but also brings people together. Our chefs use
               fresh ingredients, traditional techniques, and a passion for flavor
               to create meals you'll always remember.
@@ -77,7 +77,7 @@ function AboutUs() {
               From Small Kitchen to Big Dreams
             </h2>
             <p className="text-gray-500 leading-relaxed mb-4">
-              Founded in 2023, FoodCorner started as a small online kitchen with a
+              Founded in 2023, BiteCraft started as a small online kitchen with a
               big dream: to bring restaurant-quality meals straight to your home.
               With a passion for fresh ingredients, bold flavors, and exceptional
               service, we quickly grew into a community favorite.

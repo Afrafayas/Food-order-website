@@ -51,7 +51,7 @@ function ContactUs() {
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm">Email</p>
-                  <p className="text-gray-800 font-semibold">foodcorner@gmail.com</p>
+                  <p className="text-gray-800 font-semibold">bitecraft@gmail.com</p>
                 </div>
               </div>
 
