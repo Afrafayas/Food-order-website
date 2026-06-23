@@ -48,9 +48,9 @@ export const decreaseCartItem = (productId) => API.put(`/cart/${productId}/decre
 export const removeFromCart = (productId) => API.delete(`/cart/${productId}`);
 export const clearCart = () => API.delete('/cart');
 
-// Orders
 export const createOrder = (data) => API.post('/orders', data);
 export const getMyOrders = () => API.get('/orders/my-orders');
+export const getDeliveryFee = (lat, lng) => API.get(`/orders/delivery-fee?lat=${lat}&lng=${lng}`);
 export const getAllOrders = () => API.get('/orders');
 export const updateOrderStatus = (id, status) => API.put(`/orders/${id}/status`, { status });
 

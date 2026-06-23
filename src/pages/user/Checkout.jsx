@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { clearCart, fetchCart } from '../../redux/cartSlice';
-import { createPaymentIntent, createOrder } from '../../services/api';
+import { createPaymentIntent, createOrder, getDeliveryFee } from '../../services/api';
 import toast from 'react-hot-toast';
 import { GoogleMap, useJsApiLoader, MarkerF } from '@react-google-maps/api';
 
@@ -28,6 +28,20 @@ const Checkout = () => {
 
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [mapCenter, setMapCenter] = useState(defaultCenter);
+  const [deliveryFee, setDeliveryFee] = useState(5);
+  const [estimatedDeliveryTime, setEstimatedDeliveryTime] = useState(30);
+
+  const fetchDeliveryFee = async (lat, lng) => {
+    try {
+      const res = await getDeliveryFee(lat, lng);
+      if (res.data) {
+        setDeliveryFee(res.data.fee);
+        setEstimatedDeliveryTime(res.data.estimatedTime);
+      }
+    } catch (err) {
+      console.error('Failed to fetch delivery fee:', err);
+    }
+  };
 
   const {
     register,
@@ -92,7 +106,8 @@ const Checkout = () => {
         }
         toast.success('Address auto-filled from map! 📍');
       } else {
-        toast.error('Failed to resolve map coordinates to address.');
+        console.warn('Geocoding status:', status);
+        toast.error('Could not auto-resolve address. Please fill in details manually.');
       }
     });
   };
@@ -103,6 +118,7 @@ const Checkout = () => {
     const newLoc = { lat, lng };
     setSelectedLocation(newLoc);
     handleGeocode(lat, lng);
+    fetchDeliveryFee(lat, lng);
   };
 
   const handleMarkerDragEnd = (event) => {
@@ -111,6 +127,7 @@ const Checkout = () => {
     const newLoc = { lat, lng };
     setSelectedLocation(newLoc);
     handleGeocode(lat, lng);
+    fetchDeliveryFee(lat, lng);
   };
 
   const locateUser = () => {
@@ -124,6 +141,7 @@ const Checkout = () => {
           setMapCenter(userPos);
           setSelectedLocation(userPos);
           handleGeocode(userPos.lat, userPos.lng);
+          fetchDeliveryFee(userPos.lat, userPos.lng);
         },
         (error) => {
           toast.error('Could not get current location. Please pick on map manually.');
@@ -147,7 +165,7 @@ const Checkout = () => {
   const handlePlaceOrder = async () => {
     setOrderLoading(true);
     try {
-      await createPaymentIntent({ amount: totalPrice });
+      await createPaymentIntent({ amount: totalPrice + deliveryFee });
 
       const orderData = {
         items: items.map(item => ({
@@ -155,10 +173,14 @@ const Checkout = () => {
           quantity: item.quantity,
           price: item.price,
         })),
-        totalPrice,
+        totalPrice: totalPrice + deliveryFee,
         deliveryAddress: `${savedAddress.street}, ${savedAddress.city}, ${savedAddress.emirate}`,
         paymentMethod: 'card',
         isPaid: true,
+        deliveryLat: selectedLocation?.lat,
+        deliveryLng: selectedLocation?.lng,
+        deliveryFee,
+        estimatedDeliveryTime,
       };
 
       await createOrder(orderData);
@@ -383,7 +405,7 @@ const Checkout = () => {
                   disabled={orderLoading}
                   className="w-full btn-glow disabled:bg-gray-800 disabled:text-gray-500 text-white font-bold py-3.5 rounded-xl transition"
                 >
-                  {orderLoading ? '⏳ Processing...' : `Pay AED ${totalPrice.toFixed(2)} 🔒`}
+                  {orderLoading ? '⏳ Processing...' : `Pay AED ${(totalPrice + deliveryFee).toFixed(2)} 🔒`}
                 </button>
               </div>
             )}
@@ -407,11 +429,13 @@ const Checkout = () => {
               </div>
               <div className="flex justify-between text-xs text-gray-400">
                 <span>Delivery</span>
-                <span className="text-green-400 font-bold">Free</span>
+                <span className={deliveryFee > 0 ? 'font-bold text-white' : 'text-green-400 font-bold'}>
+                  {deliveryFee > 0 ? `AED ${deliveryFee.toFixed(2)}` : 'Free'}
+                </span>
               </div>
               <div className="flex justify-between font-black text-lg border-t border-white/5 pt-3">
                 <span>Total</span>
-                <span className="text-orange-400">AED {totalPrice.toFixed(2)}</span>
+                <span className="text-orange-400">AED {(totalPrice + deliveryFee).toFixed(2)}</span>
               </div>
             </div>
           </div>
