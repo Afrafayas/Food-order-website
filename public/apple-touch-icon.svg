@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+  <rect width="180" height="180" rx="40" fill="#0a0f1e" />
+  <g fill="none" stroke="#ff6b35" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Fork -->
+    <path d="M50 40v35c0 10 20 10 20 0V40M55 40v25M65 40v25M60 80v55" />
+    <!-- Knife -->
+    <path d="M120 40v40H100V40c0-10 20-10 20 0M110 80v55" />
+  </g>
+</svg>
