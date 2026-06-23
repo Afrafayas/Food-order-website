@@ -187,24 +187,26 @@ const Checkout = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-[#0a0f1e] py-10 px-4 text-white">
       <div className="max-w-4xl mx-auto">
 
         {/* Header */}
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">🛒 Checkout</h2>
+        <h2 className="text-2xl font-extrabold mb-8 flex items-center gap-2">
+          🛒 Checkout
+        </h2>
 
-        {/* Steps */}
-        <div className="flex items-center mb-8">
-          <div className={`flex items-center gap-2 ${step >= 1 ? 'text-orange-500' : 'text-gray-400'}`}>
-            <span className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${step >= 1 ? 'bg-orange-500 text-white' : 'bg-gray-200'}`}>1</span>
-            <span className="font-semibold">Delivery Address</span>
+        {/* Steps Progress */}
+        <div className="flex items-center mb-10 bg-white/5 border border-white/5 p-4 rounded-2xl backdrop-blur-md">
+          <div className={`flex items-center gap-3 ${step >= 1 ? 'text-orange-400' : 'text-gray-500'}`}>
+            <span className={`w-9 h-9 rounded-xl flex items-center justify-center font-black transition-all ${step >= 1 ? 'bg-gradient-to-tr from-orange-500 to-yellow-500 text-[#0a0f1e] shadow-lg shadow-orange-500/20' : 'bg-white/5 text-gray-500'}`}>1</span>
+            <span className="font-bold text-xs uppercase tracking-wider">Delivery Address</span>
           </div>
-          <div className="flex-1 h-1 mx-4 bg-gray-200">
-            <div className={`h-full bg-orange-500 transition-all duration-500 ${step >= 2 ? 'w-full' : 'w-0'}`}></div>
+          <div className="flex-1 h-0.5 mx-4 bg-white/5 rounded-full overflow-hidden">
+            <div className={`h-full bg-gradient-to-r from-orange-500 to-yellow-500 transition-all duration-500 ${step >= 2 ? 'w-full' : 'w-0'}`}></div>
           </div>
-          <div className={`flex items-center gap-2 ${step >= 2 ? 'text-orange-500' : 'text-gray-400'}`}>
-            <span className={`w-8 h-8 rounded-full flex items-center justify-center font-bold ${step >= 2 ? 'bg-orange-500 text-white' : 'bg-gray-200'}`}>2</span>
-            <span className="font-semibold">Payment</span>
+          <div className={`flex items-center gap-3 ${step >= 2 ? 'text-orange-400' : 'text-gray-500'}`}>
+            <span className={`w-9 h-9 rounded-xl flex items-center justify-center font-black transition-all ${step >= 2 ? 'bg-gradient-to-tr from-orange-500 to-yellow-500 text-[#0a0f1e] shadow-lg shadow-orange-500/20' : 'bg-white/5 text-gray-500'}`}>2</span>
+            <span className="font-bold text-xs uppercase tracking-wider">Payment</span>
           </div>
         </div>
 
@@ -215,8 +217,8 @@ const Checkout = () => {
 
             {/* Step 1: Address */}
             {step === 1 && (
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <h3 className="text-lg font-bold text-gray-800 mb-4">📍 Delivery Address</h3>
+              <div className="bg-white/5 border border-white/5 rounded-2xl shadow-xl p-6">
+                <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">📍 Delivery Address</h3>
                 <form onSubmit={handleSubmit(onAddressSubmit)} className="space-y-4">
 
                   {/* Google Maps Location Picker */}
@@ -337,7 +339,7 @@ const Checkout = () => {
 
                   <button
                     type="submit"
-                    className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-xl transition"
+                    className="w-full btn-glow text-white font-bold py-3.5 rounded-xl transition"
                   >
                     Continue to Payment →
                   </button>
@@ -347,40 +349,39 @@ const Checkout = () => {
 
             {/* Step 2: Payment */}
             {step === 2 && (
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <h3 className="text-lg font-bold text-gray-800 mb-4">💳 Payment</h3>
+              <div className="bg-white/5 border border-white/5 rounded-2xl shadow-xl p-6">
+                <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">💳 Payment</h3>
 
-                <div className="bg-gray-50 rounded-xl p-4 mb-6">
-                  <p className="text-sm text-gray-500">Delivering to:</p>
-                  <p className="font-semibold">{savedAddress?.street}, {savedAddress?.city}, {savedAddress?.emirate}</p>
-                  <p className="text-sm text-gray-600">{savedAddress?.phone}</p>
-                  <button onClick={() => setStep(1)} className="text-orange-500 text-sm mt-1 hover:underline">
+                <div className="bg-white/5 border border-white/5 rounded-xl p-4 mb-6">
+                  <p className="text-xs text-gray-400 font-bold uppercase tracking-wider">Delivering to:</p>
+                  <p className="font-semibold text-white mt-1">{savedAddress?.street}, {savedAddress?.city}, {savedAddress?.emirate}</p>
+                  <p className="text-xs text-gray-400 mt-1">{savedAddress?.phone}</p>
+                  <button onClick={() => setStep(1)} className="text-orange-400 text-xs mt-2 hover:underline font-bold">
                     Change Address
                   </button>
                 </div>
 
-                <div className="border-2 border-orange-400 rounded-xl p-4 mb-6">
+                <div className="border border-orange-500/35 bg-orange-500/5 rounded-xl p-4 mb-6">
                   <div className="flex items-center gap-3">
                     <span className="text-2xl">💳</span>
                     <div>
-                      <p className="font-semibold">Credit / Debit Card</p>
-                      <p className="text-sm text-gray-500">Secure payment via Stripe</p>
+                      <p className="font-bold text-white text-sm">Credit / Debit Card</p>
+                      <p className="text-xs text-gray-400">Secure payment via Stripe</p>
                     </div>
-                    <span className="ml-auto text-orange-500 font-bold">✓</span>
+                    <span className="ml-auto text-orange-400 font-black text-sm">✓</span>
                   </div>
                 </div>
 
-                <div className="bg-blue-50 rounded-xl p-4 mb-6 text-sm">
-                  <p className="font-semibold text-blue-700 mb-2">🧪 Test Card:</p>
-                  <p>Card: <span className="font-mono font-bold">4242 4242 4242 4242</span></p>
-                  <p>Expiry: <span className="font-mono font-bold">12/34</span></p>
-                  <p>CVV: <span className="font-mono font-bold">123</span></p>
+                <div className="bg-blue-900/25 border border-blue-800/30 text-blue-300 rounded-xl p-4 mb-6 text-xs">
+                  <p className="font-bold text-blue-400 mb-2 uppercase tracking-wider">🧪 Test Card:</p>
+                  <p className="text-gray-300">Card: <span className="font-mono font-bold text-white">4242 4242 4242 4242</span></p>
+                  <p className="text-gray-300 mt-1">Expiry: <span className="font-mono font-bold text-white">12/34</span> &nbsp;&nbsp;&nbsp; CVV: <span className="font-mono font-bold text-white">123</span></p>
                 </div>
 
                 <button
                   onClick={handlePlaceOrder}
                   disabled={orderLoading}
-                  className="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-gray-400 text-white font-bold py-3 rounded-xl transition"
+                  className="w-full btn-glow disabled:bg-gray-800 disabled:text-gray-500 text-white font-bold py-3.5 rounded-xl transition"
                 >
                   {orderLoading ? '⏳ Processing...' : `Pay AED ${totalPrice.toFixed(2)} 🔒`}
                 </button>
@@ -389,28 +390,28 @@ const Checkout = () => {
           </div>
 
           {/* Right — Order Summary */}
-          <div className="bg-white rounded-xl shadow-sm p-6 h-fit">
-            <h3 className="text-lg font-bold mb-4">Order Summary</h3>
-            <div className="space-y-3 mb-4">
+          <div className="bg-white/5 border border-white/5 rounded-2xl shadow-xl p-6 h-fit">
+            <h3 className="text-lg font-bold mb-6 border-b border-white/5 pb-3">Order Summary</h3>
+            <div className="space-y-4 mb-6">
               {items.map((item, index) => (
-                <div key={index} className="flex justify-between text-sm">
-                  <span className="text-gray-600">{item.product?.name} × {item.quantity}</span>
-                  <span className="font-semibold">AED {(item.price * item.quantity).toFixed(2)}</span>
+                <div key={index} className="flex justify-between text-xs">
+                  <span className="text-gray-400 font-semibold">{item.product?.name} × {item.quantity}</span>
+                  <span className="font-bold text-white">AED {(item.price * item.quantity).toFixed(2)}</span>
                 </div>
               ))}
             </div>
-            <div className="border-t pt-3 space-y-2">
-              <div className="flex justify-between text-gray-600">
+            <div className="border-t border-white/5 pt-4 space-y-3">
+              <div className="flex justify-between text-xs text-gray-400">
                 <span>Subtotal</span>
-                <span>AED {totalPrice.toFixed(2)}</span>
+                <span className="font-semibold text-white">AED {totalPrice.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between text-gray-600">
+              <div className="flex justify-between text-xs text-gray-400">
                 <span>Delivery</span>
-                <span className="text-green-500 font-semibold">Free</span>
+                <span className="text-green-400 font-bold">Free</span>
               </div>
-              <div className="flex justify-between font-bold text-lg">
+              <div className="flex justify-between font-black text-lg border-t border-white/5 pt-3">
                 <span>Total</span>
-                <span className="text-orange-500">AED {totalPrice.toFixed(2)}</span>
+                <span className="text-orange-400">AED {totalPrice.toFixed(2)}</span>
               </div>
             </div>
           </div>

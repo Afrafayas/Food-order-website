@@ -86,44 +86,47 @@ const ProductCard = ({ item, onAddToCart }) => {
   return (
     <div
       onClick={() => navigate(`/user-panel/product/${_id}`)}
-      className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100 cursor-pointer"
+      className="group bg-white/5 border border-white/5 rounded-2xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.2)] hover:shadow-[0_8px_35px_rgba(255,107,53,0.15)] hover:border-orange-500/25 transition-all duration-300 cursor-pointer flex flex-col h-full hover:-translate-y-1"
     >
 
-      {/* Image */}
-      <div className="relative h-36 overflow-hidden">
+      {/* Image Container with overlays */}
+      <div className="relative h-44 overflow-hidden shrink-0">
         <img
           src={image || dummyImage}
           onError={(e) => { e.target.src = dummyImage; }}
           alt={name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         />
+
+        {/* Bottom dark vignette overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1e]/90 via-transparent to-transparent" />
 
         {/* Dynamic Deal Tag */}
         {dynamicTag && (
-          <span className={`absolute top-2 left-2 ${dealTagColors[dynamicTag] || 'bg-orange-500'} text-white text-[10px] font-bold px-2 py-0.5 rounded-full`}>
+          <span className={`absolute top-3 left-3 ${dealTagColors[dynamicTag] || 'bg-orange-500'} text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-lg shadow-md`}>
             {dynamicTag}
           </span>
         )}
 
         {/* Discount */}
         {isOnSale && discountPercent > 0 && (
-          <span className="absolute top-2 right-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+          <span className="absolute top-3 right-3 bg-red-500 text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-lg shadow-md animate-pulse">
             {discountPercent}% OFF
           </span>
         )}
 
         {/* Countdown Timer */}
         {item.dealExpiry && !expired && timeLeft && (
-          <div className="absolute bottom-2 left-2 bg-black/70 text-white text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1">
+          <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-semibold px-2 py-1 rounded-lg flex items-center gap-1 border border-white/5">
             ⏱️ {timeLeft}
           </div>
         )}
 
         {/* Expired Overlay */}
         {expired && (
-          <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-            <span className="text-white font-bold text-xs bg-red-500 px-2 py-1 rounded-full">
-              Deal Expired!
+          <div className="absolute inset-0 bg-black/75 flex items-center justify-center backdrop-blur-[2px]">
+            <span className="text-white font-bold text-xs bg-red-500 px-3 py-1 rounded-xl shadow-lg border border-red-400/20">
+              Deal Expired
             </span>
           </div>
         )}
@@ -132,60 +135,63 @@ const ProductCard = ({ item, onAddToCart }) => {
         {isAuthenticated && (
           <button
             onClick={handleWishlist}
-            className="absolute bottom-2 right-2 w-7 h-7 bg-white rounded-full flex items-center justify-center shadow hover:scale-110 transition"
+            className="absolute bottom-3 right-3 w-8 h-8 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all border border-white/10"
           >
-            <Heart size={13} className={inWishlist ? 'fill-red-500 text-red-500' : 'text-gray-400'} />
+            <Heart size={14} className={inWishlist ? 'fill-red-500 text-red-500' : 'text-white/80'} />
           </button>
         )}
 
         {/* Out of Stock */}
         {stock === 0 && (
-          <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-            <span className="text-white font-bold text-xs bg-red-500 px-2 py-1 rounded-full">
+          <div className="absolute inset-0 bg-[#0a0f1e]/75 flex items-center justify-center backdrop-blur-[2px]">
+            <span className="text-white font-bold text-xs bg-red-500 px-3 py-1 rounded-xl shadow-lg border border-red-400/20">
               Out of Stock
             </span>
           </div>
         )}
       </div>
 
-      {/* Info */}
-      <div className="p-3">
-        <p className="text-[10px] text-orange-500 font-semibold uppercase tracking-wide">
-          {category?.name || category}
-        </p>
-        <h3 className="font-semibold text-gray-800 text-sm truncate mt-0.5">{name}</h3>
+      {/* Info Area */}
+      <div className="p-4 flex flex-col flex-1 justify-between">
+        <div>
+          <p className="text-[10px] text-orange-400 font-bold uppercase tracking-wider">
+            {category?.name || category}
+          </p>
+          <h3 className="font-bold text-white text-base truncate mt-1 group-hover:text-orange-400 transition-colors duration-300">{name}</h3>
 
-        {/* Rating */}
-        {reviewCount > 0 && (
-          <div className="flex items-center gap-1 mt-1">
-            <Star size={10} className="fill-yellow-400 text-yellow-400" />
-            <span className="text-[10px] font-semibold text-gray-600">{rating}</span>
-            <span className="text-[10px] text-gray-400">({reviewCount})</span>
-          </div>
-        )}
+          {/* Rating */}
+          {reviewCount > 0 && (
+            <div className="flex items-center gap-1 mt-2 bg-white/5 w-fit px-2 py-0.5 rounded-lg border border-white/5">
+              <Star size={11} className="fill-[#ffd700] text-[#ffd700]" />
+              <span className="text-[10px] font-black text-[#ffd700]">{rating}</span>
+              <span className="text-[10px] text-gray-400">({reviewCount})</span>
+            </div>
+          )}
 
-        {/* Stock Warning */}
-        {stock > 0 && stock <= 5 && (
-          <p className="text-red-500 text-[10px] font-semibold mt-1">Only {stock} left!</p>
-        )}
+          {/* Stock Warning */}
+          {stock > 0 && stock <= 5 && (
+            <p className="text-red-400 text-[10px] font-semibold mt-2 animate-pulse">Only {stock} left!</p>
+          )}
+        </div>
 
         {/* Price + Button */}
-        <div className="flex items-center justify-between mt-2">
+        <div className="flex items-center justify-between mt-4">
           <div>
-            <span className="text-orange-500 font-bold text-sm">AED {price}</span>
+            <span className="text-orange-400 font-black text-base">AED {price.toFixed(2)}</span>
             {isOnSale && originalPrice && (
-              <span className="text-gray-400 text-[10px] line-through ml-1">AED {originalPrice}</span>
+              <span className="text-gray-500 text-xs line-through ml-1.5 font-semibold">AED {originalPrice.toFixed(2)}</span>
             )}
           </div>
           <button
             onClick={e => { e.stopPropagation(); onAddToCart(); }}
             disabled={stock === 0}
-            className="bg-orange-500 hover:bg-orange-600 disabled:bg-gray-300 text-white w-7 h-7 rounded-full flex items-center justify-center transition"
+            className="bg-orange-500 hover:bg-orange-600 disabled:bg-gray-800 text-white w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 shadow-lg shadow-orange-500/20 disabled:shadow-none"
           >
-            <ShoppingCart size={13} />
+            <ShoppingCart size={15} />
           </button>
         </div>
       </div>
+
     </div>
   );
 };

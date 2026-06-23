@@ -88,7 +88,32 @@ function App() {
 
         </Route>
       </Routes>
-      <Toaster position="top-right" />
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          style: {
+            background: 'rgba(16, 22, 45, 0.85)',
+            backdropFilter: 'blur(12px)',
+            color: '#f8fafc',
+            border: '1px solid rgba(255, 107, 53, 0.25)',
+            borderRadius: '1rem',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
+            fontFamily: 'inherit',
+          },
+          success: {
+            iconTheme: {
+              primary: '#ff6b35',
+              secondary: '#0a0f1e',
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: '#ef4444',
+              secondary: '#0a0f1e',
+            },
+          },
+        }}
+      />
     </BrowserRouter>
   );
 }

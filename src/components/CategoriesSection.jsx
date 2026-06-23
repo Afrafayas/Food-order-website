@@ -37,26 +37,27 @@ const CategoriesSection = () => {
   };
 
   return (
-    <section className="w-full py-12 px-4 bg-white">
+    <section className="w-full py-16 px-4 bg-[#0a0f1e]">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-800 mb-2">
+        <div className="text-center mb-10">
+          <p className="text-orange-500 font-bold uppercase tracking-widest text-xs mb-2">Craving Something?</p>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-2">
             Browse by Category
           </h2>
-          <p className="text-gray-500">What are you craving today? 😋</p>
+          <p className="text-gray-400 text-sm">Find your favorite dishes with one click 😋</p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
           {categories.map((category) => (
             <div
               key={category._id}
               onClick={handleCategoryClick}
-              className="flex flex-col items-center justify-center gap-3 p-6 bg-orange-50 hover:bg-orange-500 text-gray-700 hover:text-white rounded-2xl cursor-pointer transition-all duration-300 group shadow-sm hover:shadow-lg hover:scale-105"
+              className="flex flex-col items-center justify-center gap-4 p-8 bg-white/5 hover:bg-orange-500/10 border border-white/5 hover:border-orange-500/30 rounded-2xl cursor-pointer transition-all duration-300 group shadow-[0_4px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_4px_25px_rgba(255,107,53,0.15)] hover:scale-105"
             >
-              <span className="text-4xl group-hover:scale-110 transition-transform duration-300">
+              <div className="w-16 h-16 rounded-full bg-white/5 group-hover:bg-orange-500/20 flex items-center justify-center text-4xl group-hover:scale-110 transition-all duration-350 shadow-inner">
                 {categoryIcons[category.name] || '🍽️'}
-              </span>
-              <p className="font-semibold text-sm text-center">
+              </div>
+              <p className="font-bold text-sm text-gray-300 group-hover:text-white transition-colors duration-300">
                 {category.name}
               </p>
             </div>

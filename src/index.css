@@ -2,12 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Reset ── */
+/* ── Reset & Typography ── */
 html, body, #root {
   margin: 0;
   padding: 0;
   height: 100%;
   overflow-x: hidden;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #0a0f1e;
+  color: #f8fafc;
 }
 
 img {
@@ -17,74 +20,150 @@ img {
 
 /* ── CSS variables ── */
 :root {
-  --background-color: #ffffff;
-  --text-color: #111827;
+  --background-color: #0a0f1e;
+  --text-color: #f8fafc;
 }
 
 .dark {
-  --background-color: #0f172a;
-  --text-color: #f1f5f9;
+  --background-color: #0a0f1e;
+  --text-color: #f8fafc;
 }
 
-/* ── Smooth theme transition ── */
+/* ── Smooth transitions ── */
 body {
   background-color: var(--background-color);
   color: var(--text-color);
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ════════════════════════════════════════
-   DARK MODE — global Tailwind overrides
-   All selectors are scoped under .dark
-   so light mode is completely unaffected.
+   GLOBAL THEME OVERRIDES — Forcing Deep Dark Navy
+   Makes both light/dark modes look premium navy.
    ════════════════════════════════════════ */
 
 /* Backgrounds */
-.dark .bg-white          { background-color: #1e293b !important; }
-.dark .bg-gray-50        { background-color: #0f172a !important; }
-.dark .bg-gray-100       { background-color: #1e293b !important; }
-.dark .bg-gray-200       { background-color: #334155 !important; }
-.dark .bg-gray-800       { background-color: #0f172a !important; }
-.dark .bg-gray-900       { background-color: #020617 !important; }
+body, .bg-gray-50, .bg-gray-50\/30 {
+  background-color: #0a0f1e !important;
+}
+.bg-white {
+  background-color: #10162d !important;
+}
+.bg-gray-100 {
+  background-color: #161c36 !important;
+}
+.bg-gray-200 {
+  background-color: #1f264d !important;
+}
+.bg-gray-800 {
+  background-color: #0d132b !important;
+}
+.bg-gray-900 {
+  background-color: #070b18 !important;
+}
 
 /* Text */
-.dark .text-gray-900     { color: #f1f5f9 !important; }
-.dark .text-gray-800     { color: #e2e8f0 !important; }
-.dark .text-gray-700     { color: #cbd5e1 !important; }
-.dark .text-gray-600     { color: #94a3b8 !important; }
-.dark .text-gray-500     { color: #64748b !important; }
-.dark .text-gray-400     { color: #94a3b8 !important; }
-
-/* Borders */
-.dark .border-gray-100   { border-color: #1e293b !important; }
-.dark .border-gray-200   { border-color: #334155 !important; }
-.dark .border-gray-300   { border-color: #475569 !important; }
-
-/* Cards / Sections that use shadow-sm */
-.dark .shadow-sm         { box-shadow: 0 1px 3px 0 rgba(0,0,0,0.4) !important; }
-.dark .shadow-md         { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.5) !important; }
-
-/* Inputs & Textareas */
-.dark input:not([type="checkbox"]):not([type="radio"]),
-.dark textarea,
-.dark select {
-  background-color: #1e293b !important;
-  color: #f1f5f9 !important;
-  border-color: #334155 !important;
+.text-gray-900, .text-black {
+  color: #f8fafc !important;
 }
-
-.dark input::placeholder,
-.dark textarea::placeholder {
+.text-gray-800 {
+  color: #e2e8f0 !important;
+}
+.text-gray-700 {
+  color: #cbd5e1 !important;
+}
+.text-gray-600 {
+  color: #94a3b8 !important;
+}
+.text-gray-500 {
   color: #64748b !important;
 }
+.text-gray-400 {
+  color: #475569 !important;
+}
 
-/* Sticky category bar & search bars */
-.dark .sticky          { background-color: #1e293b !important; }
+/* Borders */
+.border-gray-100, .border-gray-200, .border-gray-300 {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
 
-/* Dividers */
-.dark hr               { border-color: #334155 !important; }
+/* Inputs & Forms */
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select {
+  background-color: #161c36 !important;
+  color: #f8fafc !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: #ff6b35 !important;
+  box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2) !important;
+}
 
-/* Scrollbar (webkit) */
-.dark ::-webkit-scrollbar       { width: 6px; }
-.dark ::-webkit-scrollbar-track { background: #1e293b; }
-.dark ::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+/* ── Custom Utilities ── */
+
+/* Glassmorphism Panel */
+.glass-panel {
+  background: rgba(16, 22, 45, 0.65) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Premium Glowing Buttons */
+.btn-glow {
+  background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%) !important;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.35);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.55), 0 0 0 2px rgba(255, 215, 0, 0.3);
+}
+.btn-glow:active {
+  transform: translateY(0);
+}
+
+/* Gold Glow Accent (Secondary Buttons/Labels) */
+.btn-gold {
+  background: linear-gradient(135deg, #ffd700 0%, #ffb700 100%) !important;
+  color: #0a0f1e !important;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.45);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0f1e;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f264d;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff6b35;
+}
+
+/* Skeleton Loading Loader */
+.skeleton {
+  background: linear-gradient(90deg, #10162d 25%, #1c234a 50%, #10162d 75%);
+  background-size: 200% 100%;
+  animation: loading-pulse 1.5s infinite;
+  border-radius: 0.75rem;
+}
+
+@keyframes loading-pulse {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

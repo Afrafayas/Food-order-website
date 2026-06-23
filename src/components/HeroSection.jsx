@@ -89,7 +89,7 @@ const HeroSection = () => {
         }
       `}</style>
 
-      <section className="relative w-full h-screen min-h-[600px] overflow-hidden">
+      <section className="relative w-full h-screen min-h-[600px] overflow-hidden bg-[#0a0f1e]">
 
         {/* ── Background image carousel ── */}
         {SLIDES.map((slide, i) => (
@@ -98,15 +98,15 @@ const HeroSection = () => {
             src={slide.url}
             alt={slide.label}
             onError={e => { e.target.style.display = 'none'; }}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
-              i === current ? 'opacity-100 hero-kb' : 'opacity-0'
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+              i === current ? 'opacity-70 scale-105 hero-kb' : 'opacity-0 scale-100'
             }`}
           />
         ))}
 
-        {/* ── Gradient overlays ── */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        {/* ── Gradient overlays (fading into navy) ── */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0f1e] via-[#0a0f1e]/85 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1e] via-transparent to-transparent" />
 
         {/* ── Main content ── */}
         <div className="relative z-10 h-full flex items-center">
@@ -114,21 +114,21 @@ const HeroSection = () => {
             <div className="max-w-2xl" key={`content-${animKey}`}>
 
               {/* Category badge */}
-              <div className="fade-up inline-flex items-center gap-2 bg-orange-500/20 border border-orange-400/40 backdrop-blur-sm text-orange-300 px-4 py-1.5 rounded-full text-sm font-semibold mb-6"
+              <div className="fade-up inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500/30 backdrop-blur-md text-orange-400 px-4.5 py-2 rounded-full text-xs font-bold uppercase tracking-wider mb-6"
                 style={{ animationDelay: '0ms' }}>
-                <span className="text-base">{SLIDES[current].emoji}</span>
+                <span className="text-sm">{SLIDES[current].emoji}</span>
                 {SLIDES[current].label}
               </div>
 
               {/* Headline */}
-              <h1 className="fade-up text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.05] mb-4 sm:mb-5"
+              <h1 className="fade-up text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.05] mb-5 tracking-tight"
                 style={{ animationDelay: '80ms' }}>
                 Delicious Food,
-                <span className="block text-orange-400">Delivered Fast.</span>
+                <span className="block bg-gradient-to-r from-[#ff6b35] to-[#ffd700] bg-clip-text text-transparent">Delivered Fast.</span>
               </h1>
 
               {/* Subtitle */}
-              <p className="fade-up text-gray-300 text-base sm:text-lg max-w-lg mb-6 sm:mb-8 leading-relaxed"
+              <p className="fade-up text-gray-300 text-base sm:text-lg max-w-lg mb-8 leading-relaxed"
                 style={{ animationDelay: '160ms' }}>
                 Fresh meals from the best restaurants in Abu Dhabi — hot at your door in 30 minutes.
               </p>
@@ -136,10 +136,10 @@ const HeroSection = () => {
               {/* Search */}
               <form
                 onSubmit={handleSearch}
-                className="fade-up flex items-center bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden max-w-lg mb-8 focus-within:border-orange-400 transition-all"
+                className="fade-up flex items-center bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden max-w-lg mb-8 focus-within:border-orange-500/60 focus-within:ring-2 focus-within:ring-orange-500/10 transition-all shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
                 style={{ animationDelay: '240ms' }}
               >
-                <Search className="ml-5 text-white/50 flex-shrink-0" size={20} />
+                <Search className="ml-5 text-gray-400 flex-shrink-0" size={18} />
                 <input
                   type="text"
                   value={search}
@@ -147,26 +147,26 @@ const HeroSection = () => {
                   onFocus={() => { pausedRef.current = true; }}
                   onBlur={() => { pausedRef.current = false; }}
                   placeholder="Search burgers, pizza, sushi…"
-                  className="flex-1 px-4 py-4 bg-transparent text-white placeholder:text-white/40 outline-none text-sm"
+                  className="flex-1 px-4 py-4 bg-transparent text-white placeholder:text-gray-500 outline-none text-sm border-none focus:ring-0 focus:outline-none"
                 />
                 <button type="submit"
-                  className="m-2 bg-orange-500 hover:bg-orange-600 text-white font-bold px-3 sm:px-6 py-3 rounded-xl text-sm transition flex items-center gap-1 shrink-0">
+                  className="m-2 btn-glow text-white font-bold px-3 sm:px-6 py-3 rounded-xl text-xs sm:text-sm transition flex items-center gap-1 shrink-0">
                   <Search size={16} className="sm:hidden" />
                   <span className="hidden sm:inline">Search</span>
                 </button>
               </form>
 
               {/* CTAs */}
-              <div className="fade-up flex flex-wrap gap-3 mb-5 sm:mb-6" style={{ animationDelay: '320ms' }}>
+              <div className="fade-up flex flex-wrap gap-3 mb-6" style={{ animationDelay: '320ms' }}>
                 <button
                   onClick={handleOrder}
-                  className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-2xl text-sm sm:text-base transition shadow-lg shadow-orange-500/30 hover:scale-105 transform"
+                  className="flex items-center gap-2 btn-glow text-white font-bold px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl text-sm sm:text-base hover:scale-105 transform active:scale-95"
                 >
                   Order Now <ArrowRight size={16} />
                 </button>
                 <button
                   onClick={() => navigate('/about')}
-                  className="flex items-center gap-2 border-2 border-white/25 hover:border-orange-400 text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-2xl text-sm sm:text-base transition backdrop-blur-sm"
+                  className="flex items-center gap-2 border border-white/10 hover:border-orange-500 bg-white/5 hover:bg-white/10 text-white font-semibold px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl text-sm sm:text-base transition-all duration-300 backdrop-blur-sm"
                 >
                   Learn More
                 </button>
@@ -187,7 +187,7 @@ const HeroSection = () => {
                       if (!isAuthenticated) return navigate('/login');
                       navigate(`/user-panel/menu?category=${encodeURIComponent(label)}`);
                     }}
-                    className="flex items-center gap-1.5 bg-white/10 hover:bg-orange-500/80 border border-white/20 hover:border-orange-400 text-white text-sm font-medium px-4 py-2 rounded-full backdrop-blur-sm transition-all hover:scale-105"
+                    className="flex items-center gap-1.5 bg-white/5 hover:bg-orange-500/80 border border-white/5 hover:border-orange-400 text-white text-xs font-semibold px-4 py-2 rounded-xl backdrop-blur-sm transition-all duration-300 hover:scale-105"
                   >
                     <span>{emoji}</span>
                     {label}
@@ -203,10 +203,10 @@ const HeroSection = () => {
                   { value: '4.8 ★',  label: 'Rating' },
                 ].map(({ value, label }, i) => (
                   <div key={label} className="flex items-center gap-4 sm:gap-8">
-                    {i > 0 && <div className="w-px h-8 bg-white/20" />}
+                    {i > 0 && <div className="w-px h-8 bg-white/10" />}
                     <div>
-                      <p className="text-xl sm:text-2xl font-black text-white">{value}</p>
-                      <p className="text-white/50 text-xs mt-0.5">{label}</p>
+                      <p className="text-xl sm:text-2xl font-black bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">{value}</p>
+                      <p className="text-gray-400 text-xs mt-0.5">{label}</p>
                     </div>
                   </div>
                 ))}
@@ -219,7 +219,7 @@ const HeroSection = () => {
         {/* ── Bottom bar: dots + progress + label ── */}
         <div className="absolute bottom-0 left-0 right-0 z-20">
           {/* Progress bar */}
-          <div className="h-0.5 bg-white/10">
+          <div className="h-0.5 bg-white/5">
             <div key={`pb-${animKey}`} className="prog-bar h-full bg-orange-500" />
           </div>
 
@@ -231,14 +231,14 @@ const HeroSection = () => {
                   key={i}
                   onClick={() => goTo(i)}
                   className={`rounded-full transition-all duration-300 ${
-                    i === current ? 'w-8 h-2 bg-orange-500' : 'w-2 h-2 bg-white/30 hover:bg-white/60'
+                    i === current ? 'w-8 h-2 bg-orange-500' : 'w-2 h-2 bg-white/20 hover:bg-white/40'
                   }`}
                 />
               ))}
             </div>
 
             {/* Slide counter */}
-            <p className="text-white/40 text-xs font-mono">
+            <p className="text-gray-500 text-xs font-mono">
               {String(current + 1).padStart(2, '0')} / {String(SLIDES.length).padStart(2, '0')}
             </p>
           </div>

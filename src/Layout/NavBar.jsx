@@ -31,38 +31,42 @@ const Navbar = ({ darkMode, setDarkMode }) => {
   };
 
   const linkCls = ({ isActive }) =>
-    `whitespace-nowrap transition-colors duration-200 ${
-      isActive ? "text-orange-400 font-bold" : "text-gray-300 hover:text-orange-400"
+    `whitespace-nowrap transition-all duration-300 relative py-1.5 px-3 rounded-xl text-xs font-semibold uppercase tracking-wider ${
+      isActive
+        ? "text-orange-400 bg-orange-500/10 border border-orange-500/25 shadow-[0_0_15px_rgba(255,107,53,0.15)]"
+        : "text-gray-300 hover:text-white hover:bg-white/5"
     }`;
 
   const closeMobile = () => setMobileMenuOpen(false);
 
   return (
     <>
-      <nav className="w-full bg-gray-900 shadow-lg fixed top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between gap-3">
+      <nav className="w-full glass-panel fixed top-0 z-50 shadow-[0_4px_30px_rgba(0,0,0,0.3)] border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-3">
 
           {/* ── Left: back + logo ── */}
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-3 shrink-0">
             {showBack && (
               <button
                 onClick={() => navigate(-1)}
-                className="flex items-center gap-1 text-gray-400 hover:text-orange-400 transition bg-gray-800 hover:bg-gray-700 px-2.5 py-1.5 rounded-lg text-sm"
+                className="flex items-center gap-1.5 text-gray-400 hover:text-orange-400 transition bg-white/5 hover:bg-white/10 px-3 py-2 rounded-xl text-xs border border-white/5"
               >
-                <ArrowLeft size={15} />
-                <span className="hidden lg:inline text-xs">Back</span>
+                <ArrowLeft size={14} />
+                <span className="hidden lg:inline">Back</span>
               </button>
             )}
-            <Link to="/" className="flex items-center gap-1.5">
-              <UtensilsCrossed className="text-orange-500 shrink-0" size={22} />
-              <span className="text-white font-extrabold text-lg tracking-wide hidden sm:block">
-                Food<span className="text-orange-500">Corner</span>
+            <Link to="/" className="flex items-center gap-2 group">
+              <div className="bg-gradient-to-tr from-orange-500 to-yellow-500 p-1.5 rounded-xl group-hover:scale-110 transition duration-300 shadow-lg shadow-orange-500/25">
+                <UtensilsCrossed className="text-white shrink-0" size={18} />
+              </div>
+              <span className="text-white font-black text-xl tracking-wider hidden sm:block">
+                Food<span className="text-orange-400">Corner</span>
               </span>
             </Link>
           </div>
 
           {/* ── Centre: desktop nav links ── */}
-          <div className="hidden md:flex items-center gap-4 lg:gap-6 font-medium text-sm flex-1 justify-center min-w-0">
+          <div className="hidden md:flex items-center gap-3 font-medium flex-1 justify-center min-w-0">
             {!isAuthenticated && (
               <>
                 <NavLink to="/"       end className={linkCls}>Home</NavLink>
@@ -94,12 +98,12 @@ const Navbar = ({ darkMode, setDarkMode }) => {
           </div>
 
           {/* ── Right: icons + login/logout ── */}
-          <div className="hidden md:flex items-center gap-2 lg:gap-3 shrink-0">
+          <div className="hidden md:flex items-center gap-4 shrink-0">
 
             {/* Dark mode */}
             <button
               onClick={() => setDarkMode(!darkMode)}
-              className="text-gray-400 hover:text-orange-400 transition text-base"
+              className="text-gray-400 hover:text-orange-400 transition text-lg w-9 h-9 rounded-xl hover:bg-white/5 flex items-center justify-center border border-transparent hover:border-white/5"
               title="Toggle dark mode"
             >
               {darkMode ? "☀️" : "🌙"}
@@ -107,21 +111,21 @@ const Navbar = ({ darkMode, setDarkMode }) => {
 
             {isAuthenticated && user?.role === "user" && (
               <>
-                <Link to="/user-panel/wishlist" className="text-gray-400 hover:text-red-400 transition" title="Wishlist">
-                  <Heart size={19} />
+                <Link to="/user-panel/wishlist" className="text-gray-400 hover:text-red-400 transition w-9 h-9 rounded-xl hover:bg-white/5 flex items-center justify-center border border-transparent hover:border-white/5" title="Wishlist">
+                  <Heart size={18} />
                 </Link>
 
-                <Link to="/user-panel/cart" className="relative text-gray-400 hover:text-orange-400 transition" title="Cart">
-                  <ShoppingCart size={20} />
+                <Link to="/user-panel/cart" className="relative text-gray-400 hover:text-orange-400 transition w-9 h-9 rounded-xl hover:bg-white/5 flex items-center justify-center border border-transparent hover:border-white/5" title="Cart">
+                  <ShoppingCart size={18} />
                   {cartCount > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
+                    <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-[9px] w-4.5 h-4.5 rounded-full flex items-center justify-center font-black shadow-lg shadow-orange-500/30 border border-[#0a0f1e]">
                       {cartCount > 9 ? '9+' : cartCount}
                     </span>
                   )}
                 </Link>
 
-                <Link to="/user-panel/profile" className="text-gray-400 hover:text-orange-400 transition" title="Profile">
-                  <User size={19} />
+                <Link to="/user-panel/profile" className="text-gray-400 hover:text-orange-400 transition w-9 h-9 rounded-xl hover:bg-white/5 flex items-center justify-center border border-transparent hover:border-white/5" title="Profile">
+                  <User size={18} />
                 </Link>
               </>
             )}
@@ -129,16 +133,16 @@ const Navbar = ({ darkMode, setDarkMode }) => {
             {isAuthenticated ? (
               <button
                 onClick={() => setLogoutDialogOpen(true)}
-                className="flex items-center gap-1 text-gray-400 hover:text-red-400 transition text-sm"
+                className="flex items-center gap-1.5 text-gray-400 hover:text-red-400 transition text-sm font-semibold px-3 py-2 rounded-xl hover:bg-white/5"
                 title="Logout"
               >
-                <LogOut size={17} />
+                <LogOut size={16} />
                 <span className="hidden xl:inline">Logout</span>
               </button>
             ) : (
               <Link
                 to="/login"
-                className="bg-orange-500 text-white px-3 py-1.5 rounded-xl text-sm font-semibold hover:bg-orange-600 transition"
+                className="btn-glow text-white px-5 py-2 rounded-xl text-sm font-bold transition-all hover:scale-105"
               >
                 Login
               </Link>
@@ -148,10 +152,10 @@ const Navbar = ({ darkMode, setDarkMode }) => {
           {/* ── Mobile: cart badge + hamburger ── */}
           <div className="md:hidden flex items-center gap-3">
             {isAuthenticated && user?.role === "user" && (
-              <Link to="/user-panel/cart" className="relative text-gray-400 hover:text-orange-400 transition">
-                <ShoppingCart size={20} />
+              <Link to="/user-panel/cart" className="relative text-gray-400 hover:text-orange-400 transition w-9 h-9 rounded-xl hover:bg-white/5 flex items-center justify-center border border-transparent hover:border-white/5">
+                <ShoppingCart size={18} />
                 {cartCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
+                  <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-[9px] w-4.5 h-4.5 rounded-full flex items-center justify-center font-black border border-[#0a0f1e]">
                     {cartCount > 9 ? '9+' : cartCount}
                   </span>
                 )}
@@ -159,9 +163,9 @@ const Navbar = ({ darkMode, setDarkMode }) => {
             )}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-gray-400 hover:text-white transition"
+              className="text-gray-400 hover:text-white transition w-9 h-9 rounded-xl hover:bg-white/5 flex items-center justify-center border border-transparent hover:border-white/5"
             >
-              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
 
@@ -169,7 +173,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
 
         {/* ── Mobile dropdown menu ── */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-gray-800 border-t border-gray-700 px-4 py-3 flex flex-col gap-3 text-sm font-medium">
+          <div className="md:hidden glass-panel border-t border-white/5 px-4 py-4 flex flex-col gap-3 text-sm font-medium animate-in slide-in-from-top-4 duration-300">
 
             {!isAuthenticated && (
               <>
@@ -177,7 +181,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
                 <NavLink to="/about"       className={linkCls} onClick={closeMobile}>About</NavLink>
                 <NavLink to="/contact"     className={linkCls} onClick={closeMobile}>Contact</NavLink>
                 <Link to="/login" onClick={closeMobile}
-                  className="mt-1 bg-orange-500 text-white px-4 py-2 rounded-xl text-center font-semibold">
+                  className="mt-1 btn-glow text-white px-4 py-2.5 rounded-xl text-center font-bold">
                   Login
                 </Link>
               </>
@@ -192,9 +196,10 @@ const Navbar = ({ darkMode, setDarkMode }) => {
                 <NavLink to="/user-panel/profile"      className={linkCls} onClick={closeMobile}>Profile</NavLink>
                 <NavLink to="/about"                   className={linkCls} onClick={closeMobile}>About</NavLink>
                 <NavLink to="/contact"                 className={linkCls} onClick={closeMobile}>Contact</NavLink>
-                <hr className="border-gray-700" />
+                <hr className="border-white/5" />
                 <button onClick={() => { setLogoutDialogOpen(true); closeMobile(); }}
-                  className="text-left text-red-400 hover:text-red-300">
+                  className="flex items-center gap-1.5 text-left text-red-400 hover:text-red-350 px-3 py-2 rounded-xl hover:bg-red-500/5">
+                  <LogOut size={16} />
                   Logout
                 </button>
               </>
@@ -207,15 +212,16 @@ const Navbar = ({ darkMode, setDarkMode }) => {
                 <NavLink to="/admin-panel/orders"         className={linkCls} onClick={closeMobile}>Orders</NavLink>
                 <NavLink to="/admin-panel/users"          className={linkCls} onClick={closeMobile}>Users</NavLink>
                 <NavLink to="/admin-panel/banners"        className={linkCls} onClick={closeMobile}>Banners</NavLink>
-                <hr className="border-gray-700" />
+                <hr className="border-white/5" />
                 <button onClick={() => { setLogoutDialogOpen(true); closeMobile(); }}
-                  className="text-left text-red-400 hover:text-red-300">
+                  className="flex items-center gap-1.5 text-left text-red-400 hover:text-red-350 px-3 py-2 rounded-xl hover:bg-red-500/5">
+                  <LogOut size={16} />
                   Logout
                 </button>
               </>
             )}
 
-            <button onClick={() => setDarkMode(!darkMode)} className="text-left text-gray-400 text-xs mt-1">
+            <button onClick={() => setDarkMode(!darkMode)} className="text-left text-gray-400 text-xs mt-1 px-3 py-2 rounded-xl hover:bg-white/5">
               {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
             </button>
           </div>

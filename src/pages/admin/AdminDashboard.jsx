@@ -62,80 +62,96 @@ const AdminDashboard = () => {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'pending': return 'bg-yellow-100 text-yellow-700';
-      case 'confirmed': return 'bg-blue-100 text-blue-700';
-      case 'delivered': return 'bg-green-100 text-green-700';
-      case 'cancelled': return 'bg-red-100 text-red-700';
-      default: return 'bg-gray-100 text-gray-700';
+      case 'pending': return 'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20';
+      case 'confirmed': return 'bg-blue-500/10 text-blue-400 border border-blue-500/20';
+      case 'delivered': return 'bg-green-500/10 text-green-400 border border-green-500/20';
+      case 'cancelled': return 'bg-red-500/10 text-red-400 border border-red-500/20';
+      default: return 'bg-gray-500/10 text-gray-400 border border-gray-500/20';
     }
   };
 
   if (loading) return (
-    <div className="flex justify-center items-center h-screen">
-      <p className="text-orange-500 text-xl font-bold">Loading...</p>
+    <div className="min-h-screen bg-[#0a0f1e] py-10 px-4 text-white">
+      <div className="max-w-7xl mx-auto space-y-8">
+        <div className="space-y-2">
+          <div className="skeleton h-8 w-48" />
+          <div className="skeleton h-4 w-64" />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[1, 2, 3, 4].map(i => (
+            <div key={i} className="bg-white/5 border border-white/5 rounded-2xl p-6 h-24 flex items-center gap-4">
+              <div className="skeleton h-12 w-12 rounded-xl" />
+              <div className="space-y-2 flex-1">
+                <div className="skeleton h-3 w-1/2" />
+                <div className="skeleton h-5 w-3/4" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-[#0a0f1e] py-10 px-4 text-white">
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">Admin Dashboard</h1>
-          <p className="text-gray-500 mt-1">Welcome back! Here's what's happening.</p>
+          <h1 className="text-3xl font-extrabold text-white">Admin Dashboard</h1>
+          <p className="text-gray-400 mt-1">Welcome back! Here's what's happening today.</p>
         </div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {stats.map((stat) => (
-            <div key={stat.label} className="bg-white rounded-2xl shadow-sm p-6 flex items-center gap-4">
-              <div className={`${stat.light} p-3 rounded-xl`}>
+            <div key={stat.label} className="bg-white/5 border border-white/5 rounded-2xl shadow-xl p-6 flex items-center gap-4 hover:border-white/10 transition-all duration-300">
+              <div className={`p-3.5 rounded-xl ${stat.light} border border-white/5 shadow-inner`}>
                 {stat.icon}
               </div>
               <div>
-                <p className="text-sm text-gray-500">{stat.label}</p>
-                <p className="text-2xl font-bold text-gray-800">{stat.value}</p>
+                <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">{stat.label}</p>
+                <p className="text-2xl font-black text-white mt-1">{stat.value}</p>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Recent Orders */}
-        <div className="bg-white rounded-2xl shadow-sm p-6">
-          <h2 className="text-lg font-bold text-gray-800 mb-4">Recent Orders</h2>
+        {/* Recent Orders Table */}
+        <div className="bg-white/5 border border-white/5 rounded-3xl shadow-xl p-6">
+          <h2 className="text-lg font-bold text-white mb-6 border-b border-white/5 pb-3">Recent Orders</h2>
           {recentOrders.length === 0 ? (
-            <p className="text-gray-400 text-center py-8">No orders yet</p>
+            <p className="text-gray-500 text-center py-8 text-sm">No orders yet</p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-left text-gray-500 border-b">
-                    <th className="pb-3">Order ID</th>
-                    <th className="pb-3">Customer</th>
-                    <th className="pb-3">Items</th>
-                    <th className="pb-3">Total</th>
-                    <th className="pb-3">Status</th>
+                  <tr className="text-left text-gray-400 border-b border-white/5 uppercase tracking-wider text-xs">
+                    <th className="pb-4 font-bold">Order ID</th>
+                    <th className="pb-4 font-bold">Customer</th>
+                    <th className="pb-4 font-bold">Items</th>
+                    <th className="pb-4 font-bold">Total</th>
+                    <th className="pb-4 font-bold">Status</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-50">
+                <tbody className="divide-y divide-white/5">
                   {recentOrders.map((order) => (
-                    <tr key={order._id}>
-                      <td className="py-3 font-mono text-xs text-gray-600">
+                    <tr key={order._id} className="hover:bg-white/[0.01] transition duration-200">
+                      <td className="py-4 font-mono text-xs text-gray-300">
                         #{order._id.slice(-8).toUpperCase()}
                       </td>
-                      <td className="py-3 text-gray-700">
+                      <td className="py-4 text-gray-200 font-semibold">
                         {order.user?.name || 'Customer'}
                       </td>
-                      <td className="py-3 text-gray-600">
+                      <td className="py-4 text-gray-400">
                         {order.items?.length} items
                       </td>
-                      <td className="py-3 font-semibold text-orange-500">
+                      <td className="py-4 font-bold text-orange-400">
                         AED {order.totalPrice?.toFixed(2)}
                       </td>
-                      <td className="py-3">
-                        <span className={`px-2 py-1 rounded-full text-xs font-semibold ${getStatusColor(order.status)}`}>
-                          {order.status?.toUpperCase()}
+                      <td className="py-4">
+                        <span className={`inline-block px-2.5 py-0.5 rounded-lg text-[9px] font-bold uppercase tracking-wider ${getStatusColor(order.status)}`}>
+                          {order.status}
                         </span>
                       </td>
                     </tr>
