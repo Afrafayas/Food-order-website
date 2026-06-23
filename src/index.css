@@ -93,6 +93,16 @@ body, .bg-gray-50, .bg-gray-50\/30 {
 .bg-\[\#0a0f1e\]\/80 {
   background-color: var(--overlay-bg) !important;
 }
+.from-gray-900.to-gray-800 {
+  --tw-gradient-from: #f1f5f9 !important;
+  --tw-gradient-to: #e2e8f0 !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+.dark .from-gray-900.to-gray-800 {
+  --tw-gradient-from: #0d132b !important;
+  --tw-gradient-to: #070b18 !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
 
 /* Text */
 .text-gray-900, .text-black, .text-gray-850, .text-gray-800, .text-gray-300, .text-gray-200 {
