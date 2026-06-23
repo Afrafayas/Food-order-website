@@ -33,6 +33,18 @@ export class Order {
 
   @Prop({ default: false })
   isPaid: boolean;
+
+  @Prop({ type: Number, required: false })
+  deliveryLat?: number;
+
+  @Prop({ type: Number, required: false })
+  deliveryLng?: number;
+
+  @Prop({ type: Number, default: 0 })
+  deliveryFee: number;
+
+  @Prop({ type: Number, default: 30 })
+  estimatedDeliveryTime: number;
 }
 
 export const OrderSchema = SchemaFactory.createForClass(Order);

@@ -21,4 +21,20 @@ export class CreateOrderDto {
   @IsBoolean()
   @IsOptional()
   isPaid?: boolean;
+
+  @IsNumber()
+  @IsOptional()
+  deliveryLat?: number;
+
+  @IsNumber()
+  @IsOptional()
+  deliveryLng?: number;
+
+  @IsNumber()
+  @IsOptional()
+  deliveryFee?: number;
+
+  @IsNumber()
+  @IsOptional()
+  estimatedDeliveryTime?: number;
 }

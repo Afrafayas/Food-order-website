@@ -10,8 +10,61 @@ export class OrdersService {
     @InjectModel(Order.name) private orderModel: Model<OrderDocument>,
   ) {}
 
+  private calculateDelivery(lat: number, lng: number): { fee: number; time: number } {
+    const restaurantLat = 24.4539;
+    const restaurantLng = 54.3773;
+    const R = 6371;
+    const dLat = (lat - restaurantLat) * Math.PI / 180;
+    const dLng = (lng - restaurantLng) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(restaurantLat * Math.PI/180) * Math.cos(lat * Math.PI/180) *
+      Math.sin(dLng/2) * Math.sin(dLng/2);
+    const distance = R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    
+    let fee = 5;
+    if (distance > 15) fee = 20;
+    else if (distance > 7) fee = 15;
+    else if (distance > 3) fee = 10;
+    
+    const time = Math.round(distance * 3) + 10;
+    return { fee, time };
+  }
+
+  getDeliveryDetails(lat: number, lng: number) {
+    const { fee, time } = this.calculateDelivery(lat, lng);
+    const restaurantLat = 24.4539;
+    const restaurantLng = 54.3773;
+    const R = 6371;
+    const dLat = (lat - restaurantLat) * Math.PI / 180;
+    const dLng = (lng - restaurantLng) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(restaurantLat * Math.PI/180) * Math.cos(lat * Math.PI/180) *
+      Math.sin(dLng/2) * Math.sin(dLng/2);
+    const distance = R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return { fee, estimatedTime: time, distance };
+  }
+
   async create(userId: string, createOrderDto: CreateOrderDto): Promise<Order> {
-    const order = new this.orderModel({ user: userId, ...createOrderDto });
+    let deliveryFee = createOrderDto.deliveryFee ?? 5;
+    let estimatedDeliveryTime = createOrderDto.estimatedDeliveryTime ?? 30;
+
+    if (
+      createOrderDto.deliveryLat !== undefined &&
+      createOrderDto.deliveryLng !== undefined &&
+      createOrderDto.deliveryLat !== null &&
+      createOrderDto.deliveryLng !== null
+    ) {
+      const { fee, time } = this.calculateDelivery(createOrderDto.deliveryLat, createOrderDto.deliveryLng);
+      deliveryFee = fee;
+      estimatedDeliveryTime = time;
+    }
+
+    const order = new this.orderModel({
+      user: userId,
+      ...createOrderDto,
+      deliveryFee,
+      estimatedDeliveryTime,
+    });
     return order.save();
   }
 
