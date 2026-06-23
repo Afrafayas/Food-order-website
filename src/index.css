@@ -84,8 +84,8 @@ body, .bg-gray-50, .bg-gray-50\/30 {
   color: var(--text-muted) !important;
 }
 
-/* Navbar specific text adjustment */
-nav .text-white {
+/* Logo specific text adjustment */
+nav .text-white.font-black {
   color: var(--text-main) !important;
 }
 .hover\:text-white:hover {
