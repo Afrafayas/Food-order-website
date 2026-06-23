@@ -372,7 +372,7 @@ const UserDashboard = () => {
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-orange-400 font-semibold text-sm uppercase tracking-widest mb-3">Ready to eat?</p>
           <h2 className="text-4xl md:text-5xl font-black text-white mb-4">Great food is one tap away</h2>
-          <p className="text-gray-400 text-lg mb-10">Join thousands of happy customers who trust FoodCorner for their daily meals.</p>
+          <p className="text-gray-400 text-lg mb-10">Join thousands of happy customers who trust BiteCraft for their daily meals.</p>
           <button onClick={goToMenu}
             className="bg-orange-500 hover:bg-orange-600 text-white font-black px-12 py-5 rounded-2xl text-lg transition shadow-xl shadow-orange-500/30 hover:scale-105 transform">
             Explore the Menu →

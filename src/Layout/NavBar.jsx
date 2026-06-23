@@ -60,7 +60,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
                 <UtensilsCrossed className="text-white shrink-0" size={18} />
               </div>
               <span className="text-white font-black text-xl tracking-wider hidden sm:block">
-                Food<span className="text-orange-400">Corner</span>
+                Bite<span className="text-orange-400">Craft</span>
               </span>
             </Link>
           </div>
